@@ -1,0 +1,51 @@
+# WORK IN PROGRESS
+
+# Sentences
+SENTENCES = WORD? GISMU? (WORD+)?
+WORD = (PRONOUNS _?) / (CONVERT_GISMU_TO_NOUN _?) / (NAMED_ENTITY _?)
+CONVERT_GISMU_TO_NOUN = "lo" _? GISMU _? "ku"
+
+FA_FAMILY = ("fa"/"fe"/"fi"/"fo"/"fu")
+GISMU = (POSSIBLE_GISMU _?) / (GISMU_WITH_CU _?)
+
+# Helpers
+
+_ = ~r"\s+"
+
+# Pronouns (Chapter 2.3)
+
+PRONOUNS = MI / DO / TI / TA / TU / ZO_E
+MI = "mi" # I/me, we/us
+DO = "do" # You
+TI = "ti" # This, these
+TA = "ta" # That, those
+TU = "tu" # That far away, those far away
+ZO_E = "zo'e" # Unspecified value
+
+# Named entity (Chapter 2.3)
+
+NAMED_ENTITY = "la" _? ~"[A-Za-z]+"
+
+# Separator (Chapter 2.5)
+
+GISMU_WITH_CU = "cu" _? POSSIBLE_GISMU
+
+# Varying order of sumti (aka "SE Family") (Chapter 2.7)
+
+SE_FAMILY = ("se"/"te"/"ve"/"xe")
+
+# Separating paragraphs
+
+NI_O = "ni'o"
+
+# Separating sentences
+
+I = ".i"
+
+# TANRU
+
+TANRU = POSSIBLE_GISMU+
+
+# GISMU
+
+POSSIBLE_GISMU = "dunda" / "mlatu" / "pinxe" / "ladru" / "vecnu" / "tavla" / "sutra" / "blari'o" / "melbi" / "cutci" / "bajra" / "klama" / "pluka" / "gerku" / "kurji" / "kanro" / "stali" / "zarci"
