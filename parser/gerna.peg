@@ -1,16 +1,20 @@
 # WORK IN PROGRESS
 
 # Sentences
-SENTENCES = WORD? GISMU? (WORD+)?
-WORD = (PRONOUNS _?) / (CONVERT_GISMU_TO_NOUN _?) / (NAMED_ENTITY _?)
-CONVERT_GISMU_TO_NOUN = "lo" _? GISMU _? "ku"
+SENTENCES = (WORD space)* (GISMU space)* (WORD space)*
+WORD = CONVERT_GISMU_TO_NOUN / NAMED_ENTITY / MEKSO / PRONOUNS
+CONVERT_GISMU_TO_NOUN = "lo" space GISMU space "ku"
 
 FA_FAMILY = ("fa"/"fe"/"fi"/"fo"/"fu")
-GISMU = (POSSIBLE_GISMU _?) / (GISMU_WITH_CU _?)
+GISMU = POSSIBLE_GISMU / GISMU_WITH_CU
 
 # Helpers
 
-_ = ~r"\s+"
+space = ~r"\s+"?
+
+#########################################################
+# BASE GRAMMAR (Chapter 2 Quick Tour of Lojban Grammar) #
+#########################################################
 
 # Pronouns (Chapter 2.3)
 
@@ -24,11 +28,11 @@ ZO_E = "zo'e" # Unspecified value
 
 # Named entity (Chapter 2.3)
 
-NAMED_ENTITY = "la" _? ~"[A-Za-z]+"
+NAMED_ENTITY = "la" space ~"[A-Za-z]+"
 
 # Separator (Chapter 2.5)
 
-GISMU_WITH_CU = "cu" _? POSSIBLE_GISMU
+GISMU_WITH_CU = "cu" space POSSIBLE_GISMU
 
 # Varying order of sumti (aka "SE Family") (Chapter 2.7)
 
@@ -49,3 +53,79 @@ TANRU = POSSIBLE_GISMU+
 # GISMU
 
 POSSIBLE_GISMU = "dunda" / "mlatu" / "pinxe" / "ladru" / "vecnu" / "tavla" / "sutra" / "blari'o" / "melbi" / "cutci" / "bajra" / "klama" / "pluka" / "gerku" / "kurji" / "kanro" / "stali" / "zarci"
+
+###############################################
+# MEKSO (Chapter 18 Mathematical Expressions) #
+###############################################
+
+MEKSO = (NUMERAL space)* / EQUATION
+
+# Digits (Chapter 18.2)
+
+PA = "pa"        # 1
+RE = "re"        # 2
+CI = "ci"        # 3
+VO = "vo"        # 4
+MU = "mu"        # 5
+XA = "xa"        # 6
+ZE = "ze"        # 7
+BI = "bi"        # 8
+SO = "so"        # 9
+NO = "no"        # 0
+
+DIGIT = (SIGN space)? (SPECIAL_NUMBERS / PA / RE / CI / VO / MU / XA / ZE / BI / SO / NO)
+
+# Signs and numerical punctuation (Chapter 18.3)
+
+MA_U = "ma'u"    # positive sign
+NI_U = "ni'u"    # negative sign
+PI = "pi"        # decimal point
+FI_U = "fi'u"    # fraction slash
+RA_E = "ra'e"    # repeating decimal
+KI_O = "ki'o"    # comma between digits
+CEHI = "ce'i"    # percent sign
+SIGN = MA_U / NI_U
+MODIFIER = PI / FI_U / RA_E / KI_O
+modifierAllowedBeforeNumber = PI / FI_U
+PERCENTAGE = CEHI
+
+NUMERAL = (modifierAllowedBeforeNumber space)? (DIGIT space)* (MODIFIER space)? (DIGIT space)* (PERCENTAGE space)?
+
+# Special numbers (Chapter 18.4)
+
+CI_I = "ci'i"    # infinity
+KA_O = "ka'o"    # imaginary i
+PAI = "pai"      # pi
+TE_O = "te'o"    # exponential e
+FI_U = "fi'u"    # phi
+SPECIAL_NUMBERS = (CI_I / KA_O / PAI / TE_O / FI_U)
+
+# Infix expressions and equations (Chapter 18.5)
+
+DU = "du"       # equals
+SU_I = "su'i"   # plus
+VU_U = "vu'u"   # minus
+PI_I = "pi'i"   # times
+TE_A = "te'a"   # raised to the power
+NY = "ny."      # letter "n”
+VEI = "vei"     # left parenthesis
+VE_O = "ve'o"   # right parenthesis
+
+OPERATOR = SU_I / VU_U / PI_I
+
+EQUATION = EQUATION_PART space DU space EQUATION_PART
+EQUATION_PART = "li" space (MEKSO space)* ( (OPERATOR space)+ (MEKSO space)+ )*
+
+
+####################################################
+# MAGIC WORDS (Chapter 19 Putting it all together) #
+####################################################
+
+# Contrastive Emphasis: Selma'o BAhE
+
+word_emphasis = (BA_E_SELMA_O space)*
+
+BA_E_SELMA_O = BA_E / ZA_E
+
+BA_E = "ba'e"
+ZA_E = "za'e"

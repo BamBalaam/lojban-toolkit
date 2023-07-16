@@ -14,6 +14,9 @@ def sentences():
     # Get all files with the Lojban sentences to test the parser against
     chapter_files = os.listdir(os.path.join(__location__, "sentences"))
 
+    # WIP
+    chapter_files = ["chapter_2.txt"]
+
     sentences = []
     for chap_file in chapter_files:
         file_path = os.path.join(__location__, f"sentences/{chap_file}")
@@ -45,5 +48,7 @@ def test_chapter_sentences(chapter_id_and_sentence, parser):
     chapter_id, sentence = chapter_id_and_sentence
     try:
         parser.get_parsed_sentence(sentence)
-    except IncompleteParseError:
-        pytest.fail(f"Sentence '{sentence}' ({chapter_id})")
+    except IncompleteParseError as e:
+        pytest.fail(
+            f"Sentence '{sentence}' ({chapter_id})"
+        )

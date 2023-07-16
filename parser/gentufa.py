@@ -16,6 +16,7 @@ class Gentufa:
 
     def __init__(self):
         with open(os.path.join(__location__, "gerna.peg"), "r") as f:
+        #with open(os.path.join(__location__, "camxes.peg"), "r") as f:
             grammar_text = f.read()
         self.grammar = Grammar(grammar_text)
 
