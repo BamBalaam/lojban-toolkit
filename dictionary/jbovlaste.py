@@ -19,10 +19,12 @@ class Jbovlaste:
         for word in words:
             valsi = word.attrib["word"]
             valsi_type = word.attrib["type"]
-            self.dictionary[valsi] = {}
-            self.dictionary[valsi]["type"] = valsi_type
-            self.dictionary[valsi]["definition"] = word.find("definition").text
-            self.dictionary[valsi]["glosswords"] = []
+            if valsi_type not in self.dictionary.keys():
+                self.dictionary[valsi_type] = {}
+
+            self.dictionary[valsi_type][valsi] = {}
+            self.dictionary[valsi_type][valsi]["definition"] = word.find("definition").text
+            self.dictionary[valsi_type][valsi]["glosswords"] = []
             glosswords = word.findall("glossword")
             for element in glosswords:
                 glossword = element.attrib["word"]
@@ -31,15 +33,27 @@ class Jbovlaste:
                     sense = element.attrib["sense"]
                 except Exception:
                     pass
-                self.dictionary[valsi]["glosswords"].append(
+                self.dictionary[valsi_type][valsi]["glosswords"].append(
                     {
                         "word": glossword,
                         "sense": sense,
                     }
                 )
 
+    def get_dict(self):
+        return self.dictionary
+
     def get_word(self, word):
-        return self.dictionary[word]
+        word_struct = None
+        for valsi_type in self.dictionary.keys():
+            try:
+                word_struct = self.dictionary[valsi_type][word]
+                word_struct["type"] = valsi_type
+            except KeyError:
+                pass
+        if word_struct is None:
+            raise Exception("Word not found in the jbovlaste.")
+        return word_struct
 
     def get_word_pretty(self, word):
         output_word = self.get_word(word)
