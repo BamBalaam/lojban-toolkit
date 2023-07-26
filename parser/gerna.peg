@@ -1,20 +1,44 @@
-# WORK IN PROGRESS
+# This PEG does not work as a standalone grammar importable by any software.
+# It is an experimental grammar written in the context of a Master Thesis
+# (see https://github.com/BamBalaam/master-thesis)
+#
+# This PEG has elements which are augmented by an external script:
+# All tags surrounded by curly braces ( {} ) are replaced by a list of words in a
+# dictionary.
+#
+# This allows the PEG to focus less on the morphology of words and more on the
+# structure of Lojban sentences, grammar, modifiers, etc.
+
+##########################################
+# Base Grammar - Where the magic happens #
+##########################################
 
 # Sentences
-SENTENCES = (WORD space)* (GISMU space)* (WORD space)*
+SENTENCES = WORD* (SE_FAMILY? GISMU)* WORD*
 WORD = CONVERT_GISMU_TO_NOUN / NAMED_ENTITY / MEKSO / PRONOUNS
+
+# Words by their morphological class
+CMEVLA = {{cmevla}}
+
+POSSIBLE_GISMU = {{gismu}}
+GISMU = ( POSSIBLE_GISMU / GISMU_WITH_CU / TANRU) space
 CONVERT_GISMU_TO_NOUN = "lo" space GISMU space "ku"
 
-FA_FAMILY = ("fa"/"fe"/"fi"/"fo"/"fu")
-GISMU = POSSIBLE_GISMU / GISMU_WITH_CU
+LUJVO = {{lujvo}}
+FUhIVLA = {{fu'ivla}}
+BRIVLA = GISMU / LUJVO / FUhIVLA
+
+# CMAVO = A_SELMAhO / BAI_SELMAhO / BAhE_SELMAhO / BE_SELMAhO / BEI_SELMAhO / BEhO_SELMAhO / BIhE_SELMAhO / BIhI / BO / BOI / BU / BY / CAhA / CAI / CEI / CEhE / CO / COI / CU / CUhE / DAhO / DOI / DOhU / FA / FAhA / FAhO / FEhE / FEhU / FIhO / FOI / FUhA / FUhE / FUhO / GA / GAhO / GEhU / GI / GIhA / GOI / GOhA / GUhA / I / JA / JAI / JOhI / JOI / KE / KEhE / KEI / KI / KOhA / KU / KUhE / KUhO / LA / LAU / LAhE / LE / LEhU / LI / LIhU / LOhO / LOhU / LU / LUhU / MAhO / MAI / ME / MEhU / MOhE / MOhI / MOI / NA / NAI / NAhE / NAhU / NIhE / NIhO / NOI / NU / NUhA / NUhI / NUhU / PA / PEhE / PEhO / PU / RAhO / ROI / SA / SE / SEI / SEhU / SI / SOI / SU / TAhE / TEhU / TEI / TO / TOI / TUhE / TUhU / UI / VA / VAU / VEI / VEhO / VUhU / VEhA / VIhA / VUhO / XI / ZAhO / ZEhA / ZEI / ZI / ZIhE / ZO / ZOI / ZOhU
+
+FA_FAMILY = ( "fa" / "fe" / "fi" / "fo" / "fu" )
 
 # Helpers
 
 space = ~r"\s+"?
 
-#########################################################
-# BASE GRAMMAR (Chapter 2 Quick Tour of Lojban Grammar) #
-#########################################################
+##############################################
+# Chapter 2 - A Quick Tour of Lojban Grammar #
+##############################################
 
 # Pronouns (Chapter 2.3)
 
@@ -36,27 +60,236 @@ GISMU_WITH_CU = "cu" space POSSIBLE_GISMU
 
 # Varying order of sumti (aka "SE Family") (Chapter 2.7)
 
-SE_FAMILY = ("se"/"te"/"ve"/"xe")
+SE_FAMILY = ("se"/"te"/"ve"/"xe") space
 
 # Separating paragraphs
 
 NI_O = "ni'o"
 
-# Separating sentences
-
-I = ".i"
-
 # TANRU
 
-TANRU = POSSIBLE_GISMU+
+TANRU = (POSSIBLE_GISMU space)+
 
-# GISMU
+#################################
+# Chapter 4 - Lojban Morphology #
+#################################
 
-POSSIBLE_GISMU = "dunda" / "mlatu" / "pinxe" / "ladru" / "vecnu" / "tavla" / "sutra" / "blari'o" / "melbi" / "cutci" / "bajra" / "klama" / "pluka" / "gerku" / "kurji" / "kanro" / "stali" / "zarci"
+# ZEI = " "
 
-###############################################
-# MEKSO (Chapter 18 Mathematical Expressions) #
-###############################################
+##############################################
+# Chapter 5 - The Structure Of Lojban selbri #
+##############################################
+
+# BE_SELMAhO = " "
+
+# BEI_SELMAhO = " "
+
+# BEhO_SELMAhO = " "
+
+# CO = " "
+
+# KE = " "
+
+# KEhE = " "
+
+# ME = " "
+
+# MEhU = " "
+
+# MOI = " "
+
+# SE = " "
+
+##############################################
+# Chapter 6 - The Structure Of Lojban selbri #
+##############################################
+
+# COI = " "
+
+# KU = " "
+
+# LA = " "
+
+# LAhE = " "
+
+# LE = " "
+
+# LUhU = " "
+
+#######################################
+# Chapter 7 - Pro-sumti And Pro-bridi #
+#######################################
+
+# CEI = " "
+
+# DAhO = " "
+
+# GOhA = " "
+
+# KOhA = " "
+
+# RAhO = " "
+
+# SOI = " "
+
+################################
+# Chapter 8 - Relative Clauses #
+################################
+
+# GEhU = " "
+
+# GOI = " "
+
+# KUhO = " "
+
+# NOI = " "
+
+# VUhO = " "
+
+# ZIhE = " "
+
+######################
+# Chapter 9 - Modals #
+######################
+
+BAI_SELMAhO = " "
+
+# BO = " "
+
+# CU = " "
+
+# FA = " "
+
+# FEhU = " "
+
+# FIhO = " "
+
+# JAI = " "
+
+########################################
+# Chapter 10 - Space/Time Tense System #
+########################################
+
+# CAhA = " "
+
+# CUhE = " "
+
+# FAhA = " "
+
+# FEhE = " "
+
+# KI = " "
+
+# MOhI = " "
+
+# PU = " "
+
+# ROI = " "
+
+# TAhE = " "
+
+# VA = " "
+
+# VEhA = " "
+
+# VIhA = " "
+
+# ZAhO = " "
+
+# ZEhA = " "
+
+# ZI = " "
+
+############################
+# Chapter 11 - Abstraction #
+############################
+
+# KEI = " "
+
+# NU = " "
+
+#######################################
+# Chapter 12 - Lujvo Place Structures #
+#######################################
+
+#####################################################
+# Chapter 13 - Attitudinal and Emotional Indicators #
+#####################################################
+
+# CAI = " "
+
+# DOI = " "
+
+# DOhU = " "
+
+# UI = " "
+
+#########################################
+# Chapter 14 - Lojban Connective System #
+#########################################
+
+# A_SELMAhO = &CMAVO ( "a" / "e" / "ji" / "o" / "u" ) &post_word
+
+# BIhI = " "
+
+# CEhE = " "
+
+# GA = " "
+
+# GAhO = " "
+
+# GI = " "
+
+# GIhA = " "
+
+# GUhA = " "
+
+# JA = " "
+
+# JOI = " "
+
+# NA = " "
+
+# NAI = " "
+
+# NUhI = " "
+
+# NUhU = " "
+
+# PEhE = " "
+
+# VAU = " "
+
+#########################
+# Chapter 15 - Negation #
+#########################
+
+# NAhE = " "
+
+######################
+# Chapter 16 - Logic #
+######################
+
+# ZOhU = " "
+
+#######################################
+# Chapter 17 - Lojban Latteral System #
+#######################################
+
+# BU = " "
+
+# BY = " "
+
+# FOI = " "
+
+# LAU = " "
+
+# TEI = " "
+
+
+#########################################
+# Chapter 18 - Mathematical Expressions #
+#########################################
 
 MEKSO = (NUMERAL space)* / EQUATION
 
@@ -116,16 +349,97 @@ OPERATOR = SU_I / VU_U / PI_I
 EQUATION = EQUATION_PART space DU space EQUATION_PART
 EQUATION_PART = "li" space (MEKSO space)* ( (OPERATOR space)+ (MEKSO space)+ )*
 
+# BIhE_SELMAhO = " "
 
-####################################################
-# MAGIC WORDS (Chapter 19 Putting it all together) #
-####################################################
+# BOI = " "
+
+# FUhA = " "
+
+# JOhI = " "
+
+# KUhE = " "
+
+# LI = " "
+
+# LOhO = " "
+
+# MAI = " "
+
+# MAhO = " "
+
+# MOhE = " "
+
+# NAhU = " "
+
+# NIhE = " "
+
+# NUhA = " "
+
+# PA = " "
+
+# PEhO = " "
+
+# TEhU = " "
+
+# VEI = " "
+
+# VEhO = " "
+
+# VUhU = " "
+
+# XI = " "
+
+##########################################
+# Chapter 19 - Structure of Lojban Texts #
+##########################################
 
 # Contrastive Emphasis: Selma'o BAhE
 
-word_emphasis = (BA_E_SELMA_O space)*
+BAhE_SELMAhO = BAhE / ZAhE
 
-BA_E_SELMA_O = BA_E / ZA_E
+BAhE = "ba'e"
+ZAhE = "za'e"
 
-BA_E = "ba'e"
-ZA_E = "za'e"
+# FAhO = " "
+
+# FUhE = " "
+
+# FUhO = " "
+
+# LEhU = " "
+
+# LIhU = " "
+
+# LOhU = " "
+
+# LU = " "
+
+# NIhO = " "
+
+# SA = " "
+
+# SEI = " "
+
+# SEhU = " "
+
+# SI = " "
+
+# SU = " "
+
+# TO = " "
+
+# TOI = " "
+
+# TUhE = " "
+
+# TUhU = " "
+
+# Y = " "
+
+# ZO = " "
+
+# ZOI = " "
+
+# Separating sentences
+
+I = ".i"
