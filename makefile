@@ -1,3 +1,3 @@
 .PHONY: test
 test:
-	PYTHONPATH=. pytest -ra --tb=short
+	PYTHONPATH=. pytest -rA --tb=short --verbose
