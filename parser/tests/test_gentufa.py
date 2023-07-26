@@ -5,6 +5,8 @@ import pytest
 from parser.gentufa import Gentufa
 from parsimonious.exceptions import IncompleteParseError
 
+parser = Gentufa()
+
 
 def sentences():
     __location__ = os.path.realpath(
@@ -39,12 +41,7 @@ def chapter_id_and_sentence(request):
     yield chapter_id, sentence
 
 
-@pytest.fixture
-def parser():
-    return Gentufa()
-
-
-def test_chapter_sentences(chapter_id_and_sentence, parser):
+def test_chapter_sentences(chapter_id_and_sentence):
     chapter_id, sentence = chapter_id_and_sentence
     try:
         parser.get_parsed_sentence(sentence)
