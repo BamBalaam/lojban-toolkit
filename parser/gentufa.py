@@ -28,6 +28,7 @@ class Gentufa:
         self.grammar = Grammar(grammar_text)
 
     def get_parsed_sentence(self, sentence):
+        sentence = sentence + " EOL" # Adding end of line indicator to avoid parsing issues
         return self.grammar.parse(sentence)
 
 

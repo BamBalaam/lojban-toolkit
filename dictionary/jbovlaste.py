@@ -5,17 +5,21 @@ import xml.etree.ElementTree as ET
 
 class Jbovlaste:
     """
+    Creates an object which allows to fetch Lojban words .
+    These words 
     Parses all words in the official Jbovlaste ("dictionary" in Lojban).
     Words include:
         - a type
         - a definition
-        - optional glosswords in the target language of the dictionary
+        - optional glossary words in the target language of the dictionary
     """
 
     def __init__(self, language="en"):
         self._dictionary = {}
-
-        tree = ET.parse(f"./dictionary/jbovlaste-{language}.xml")
+        try:
+            tree = ET.parse(f"./dictionary/jbovlaste-{language}.xml")
+        except FileNotFoundError as exc:
+            raise ValueError(f"Language '{language}' is not available.") from exc
         root = tree.getroot()
         words = root[0].findall("valsi")
 
@@ -32,11 +36,7 @@ class Jbovlaste:
             glosswords = word.findall("glossword")
             for element in glosswords:
                 glossword = element.attrib["word"]
-                sense = None
-                try:
-                    sense = element.attrib["sense"]
-                except Exception:
-                    pass
+                sense = element.attrib.get("sense")
                 self._dictionary[valsi_type][valsi]["glosswords"].append(
                     {
                         "word": glossword, "sense": sense,
@@ -48,14 +48,14 @@ class Jbovlaste:
 
     def get_word_struct(self, word):
         word_struct = None
-        for valsi_type in self._dictionary.keys():
+        for valsi_type, words in self._dictionary.items():
             try:
-                word_struct = self._dictionary[valsi_type][word]
+                word_struct = words[word]
                 word_struct["type"] = valsi_type
             except KeyError:
                 pass
         if word_struct is None:
-            raise Exception("Word not found in the jbovlaste.")
+            raise KeyError("Word not found in the jbovlaste.")
         return word_struct
 
     def get_word_pretty(self, word):
@@ -81,7 +81,7 @@ class Jbovlaste:
             "args": arguments
         }
 
-    def get_definition_object(self, word):
+    def get_definition_objects_list(self, word):
         definition = self.get_word_struct(word)["definition"]
         definitions_raw = definition.split(";")
         definitions_final = []
@@ -97,6 +97,6 @@ if __name__ == "__main__":
     temporary_dict = Jbovlaste()
     try:
         print(temporary_dict.get_word_pretty(sys.argv[1]))
-    except Exception as e:
+    except KeyError as e:
         print("Error: " + str(e))
         sys.exit(1)

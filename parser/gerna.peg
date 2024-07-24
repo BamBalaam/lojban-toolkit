@@ -9,72 +9,84 @@
 # This allows the PEG to focus less on the morphology of words and more on the
 # structure of Lojban sentences, grammar, modifiers, etc.
 
-##########################################
-# Base Grammar - Where the magic happens #
-##########################################
+#################################################
+# Base Grammar - Where the paring magic happens #
+#################################################
 
 # Sentences
-SENTENCES = WORD* (SE_FAMILY? GISMU)* WORD*
-WORD = CONVERT_GISMU_TO_NOUN / NAMED_ENTITY / MEKSO / PRONOUNS
+SENTENCE = (LOJBAN_WORDS_OR_EXPRESSIONS space)+ EOL
 
-# Words by their morphological class
-CMEVLA = {{cmevla}}
-
-POSSIBLE_GISMU = {{gismu}}
-GISMU = ( POSSIBLE_GISMU / GISMU_WITH_CU / TANRU) space
-CONVERT_GISMU_TO_NOUN = "lo" space GISMU space "ku"
-
-LUJVO = {{lujvo}}
-FUhIVLA = {{fu'ivla}}
+# Verbs
 BRIVLA = GISMU / LUJVO / FUhIVLA
 
-# CMAVO = A_SELMAhO / BAI_SELMAhO / BAhE_SELMAhO / BE_SELMAhO / BEI_SELMAhO / BEhO_SELMAhO / BIhE_SELMAhO / BIhI / BO / BOI / BU / BY / CAhA / CAI / CEI / CEhE / CO / COI / CU / CUhE / DAhO / DOI / DOhU / FA / FAhA / FAhO / FEhE / FEhU / FIhO / FOI / FUhA / FUhE / FUhO / GA / GAhO / GEhU / GI / GIhA / GOI / GOhA / GUhA / I / JA / JAI / JOhI / JOI / KE / KEhE / KEI / KI / KOhA / KU / KUhE / KUhO / LA / LAU / LAhE / LE / LEhU / LI / LIhU / LOhO / LOhU / LU / LUhU / MAhO / MAI / ME / MEhU / MOhE / MOhI / MOI / NA / NAI / NAhE / NAhU / NIhE / NIhO / NOI / NU / NUhA / NUhI / NUhU / PA / PEhE / PEhO / PU / RAhO / ROI / SA / SE / SEI / SEhU / SI / SOI / SU / TAhE / TEhU / TEI / TO / TOI / TUhE / TUhU / UI / VA / VAU / VEI / VEhO / VUhU / VEhA / VIhA / VUhO / XI / ZAhO / ZEhA / ZEI / ZI / ZIhE / ZO / ZOI / ZOhU
+# Core Verbs
+GISMU = {{gismu}}
 
-FA_FAMILY = ( "fa" / "fe" / "fi" / "fo" / "fu" )
+# Verbs made of affixes
+LUJVO = {{lujvo}}
+
+# Borrowed verbs + Loan words
+FUhIVLA = {{fu'ivla}}
+
+# Name words
+CMEVLA = {{cmevla}}
+
+# Particles + Structure Words
+# CMAVO = A_SELMAhO / BAI_SELMAhO / BAhE_SELMAhO / BE_SELMAhO / BEI_SELMAhO / BEhO_SELMAhO / BIhE_SELMAhO / BIhI / BO / BOI / BU / BY / CAhA / CAI / CEI / CEhE / CO / COI / CU / CUhE / DAhO / DOI / DOhU / FA_SELMAhO / FAhA / FAhO / FEhE / FEhU / FIhO / FOI / FUhA / FUhE / FUhO / GA / GAhO / GEhU / GI / GIhA / GOI / GOhA / GUhA / I / JA / JAI / JOhI / JOI / KE / KEhE / KEI / KI / KOhA / KU / KUhE / KUhO / LA / LAU / LAhE / LE / LEhU / LI / LIhU / LOhO / LOhU / LU / LUhU / MAhO / MAI / ME / MEhU / MOhE / MOhI / MOI / NA / NAI / NAhE / NAhU / NIhE / NIhO / NOI / NU / NUhA / NUhI / NUhU / PA / PEhE / PEhO / PU / RAhO / ROI / SA / SE / SEI / SEhU / SI / SOI / SU / TAhE / TEhU / TEI / TO / TOI / TUhE / TUhU / UI / VA / VAU / VEI / VEhO / VUhU / VEhA / VIhA / VUhO / XI / ZAhO / ZEhA / ZEI / ZI / ZIhE / ZO / ZOI / ZOhU
 
 # Helpers
+space = ~r"\s*"?
+EOL = "EOL"
 
-space = ~r"\s+"?
+# Modifiers
+CONVERT_BRIVLA_TO_NOUN = "lo" space BRIVLA space "ku"
+LOJBAN_WORDS_OR_EXPRESSIONS = BRIVLA_WITH_OR_WITHOUT_MODIFIERS / PRONOUNS / NAMED_ENTITY / MEKSO
+BRIVLA_WITH_OR_WITHOUT_MODIFIERS = BRIVLA / TANRU / BRIVLA_WITH_CU / BRIVLA_WITH_SE_FAMILY / CONVERT_BRIVLA_TO_NOUN / DESCRIPTION_BRIVLA
 
 ##############################################
 # Chapter 2 - A Quick Tour of Lojban Grammar #
 ##############################################
 
 # Pronouns (Chapter 2.3)
-
-PRONOUNS = MI / DO / TI / TA / TU / ZO_E
 MI = "mi" # I/me, we/us
 DO = "do" # You
 TI = "ti" # This, these
 TA = "ta" # That, those
 TU = "tu" # That far away, those far away
 ZO_E = "zo'e" # Unspecified value
+PRONOUNS = (MI / DO / TI / TA / TU / ZO_E)
 
 # Named entity (Chapter 2.3)
-
-NAMED_ENTITY = "la" space ~"[A-Za-z]+"
+NAMED_ENTITY = "la" space ~r"[A-Za-z]+"
 
 # Separator (Chapter 2.5)
+BRIVLA_WITH_CU = "cu" space (BRIVLA / BRIVLA_WITH_SE_FAMILY)
 
-GISMU_WITH_CU = "cu" space POSSIBLE_GISMU
+# Varying order of sumti (aka "SE SELMA'O") (Chapter 2.7)
+SE = "se"
+TE = "te"
+VE = "ve"
+XE = "xe"
+SE_SELMAhO = SE / TE / VE / XE
+BRIVLA_WITH_SE_FAMILY = SE_SELMAhO space BRIVLA
 
-# Varying order of sumti (aka "SE Family") (Chapter 2.7)
-
-SE_FAMILY = ("se"/"te"/"ve"/"xe") space
-
-# Separating paragraphs
-
+# Separating paragraphs (Chapter 2.8)
 NI_O = "ni'o"
 
-# TANRU
+# Separating sentences (Chapter 2.8)
+I = ".i"
 
-TANRU = (POSSIBLE_GISMU space)+
+# Tanru (Chapter 2.9)
+TANRU = (BRIVLA space)+
+
+# Description brivla (Chapter 2.10)
+DESCRIPTION_BRIVLA = "le" space BRIVLA space "ku"?
 
 #################################
 # Chapter 4 - Lojban Morphology #
 #################################
 
-# ZEI = " "
+# ZEI = BRIVLA space "zei" space BRIVLA
 
 ##############################################
 # Chapter 5 - The Structure Of Lojban selbri #
@@ -100,9 +112,9 @@ TANRU = (POSSIBLE_GISMU space)+
 
 # SE = " "
 
-##############################################
-# Chapter 6 - The Structure Of Lojban selbri #
-##############################################
+################################
+# Chapter 6 - The Lojban sumti #
+################################
 
 # COI = " "
 
@@ -152,13 +164,13 @@ TANRU = (POSSIBLE_GISMU space)+
 # Chapter 9 - Modals #
 ######################
 
-BAI_SELMAhO = " "
+# BAI_SELMAhO = " "
 
 # BO = " "
 
 # CU = " "
 
-# FA = " "
+# FA_SELMAhO = "fa" / "fe" / "fi" / "fo" / "fu"
 
 # FEhU = " "
 
@@ -228,7 +240,7 @@ BAI_SELMAhO = " "
 # Chapter 14 - Lojban Connective System #
 #########################################
 
-# A_SELMAhO = &CMAVO ( "a" / "e" / "ji" / "o" / "u" ) &post_word
+# A_SELMAhO = &CMAVO ( "a" / "e" / "ji" / "o" / "u" )
 
 # BIhI = " "
 
@@ -291,7 +303,11 @@ BAI_SELMAhO = " "
 # Chapter 18 - Mathematical Expressions #
 #########################################
 
-MEKSO = (NUMERAL space)* / EQUATION
+MEKSO = (NUMERAL space)+ / EQUATION
+
+NUMERAL = (modifierAllowedBeforeNumber space)? (DIGIT space)* (MODIFIER space)? (DIGIT space)* (PERCENTAGE space)?
+EQUATION = EQUATION_PART space DU space EQUATION_PART
+EQUATION_PART = "li" space (MEKSO space)* ( (OPERATOR space)+ (MEKSO space)+ )*
 
 # Digits (Chapter 18.2)
 
@@ -322,7 +338,6 @@ MODIFIER = PI / FI_U / RA_E / KI_O
 modifierAllowedBeforeNumber = PI / FI_U
 PERCENTAGE = CEHI
 
-NUMERAL = (modifierAllowedBeforeNumber space)? (DIGIT space)* (MODIFIER space)? (DIGIT space)* (PERCENTAGE space)?
 
 # Special numbers (Chapter 18.4)
 
@@ -345,9 +360,6 @@ VEI = "vei"     # left parenthesis
 VE_O = "ve'o"   # right parenthesis
 
 OPERATOR = SU_I / VU_U / PI_I
-
-EQUATION = EQUATION_PART space DU space EQUATION_PART
-EQUATION_PART = "li" space (MEKSO space)* ( (OPERATOR space)+ (MEKSO space)+ )*
 
 # BIhE_SELMAhO = " "
 
@@ -439,7 +451,3 @@ ZAhE = "za'e"
 # ZO = " "
 
 # ZOI = " "
-
-# Separating sentences
-
-I = ".i"

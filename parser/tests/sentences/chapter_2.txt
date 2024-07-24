@@ -44,3 +44,29 @@ le sutra cu tavla
 le sutra se tavla
 le sutra cu se tavla
 mi cu tavla le vecnu ku le blari'o ku
+
+# Chapter 2.11
+mi cu klama ti zo'e zo'e ta
+ta cu blari'o
+ti cu djarspageti
+# skipping this sentence as go'i is covered mostly in Chapter 7 - ta cu go'i
+
+# Chapter 2.12
+le gerku ku cu melbi
+ti cu pluka mi
+# skipping this sentence as di'u is covered mostly in Chapter 7 - di'u cu pluka mi
+# skipping this sentence as di'u is covered mostly in Chapter 7 - la'e di'u cu pluka mi
+
+# Chapter 2.13
+# skipping this sentence as possession is covered mostly in Chapter 8 - le mi gerku cu sutra
+
+# Chapter 2.14
+# doi djan
+# coi. djan
+# co'o. djan
+# do tavla
+# ko tavla
+# ko sutra
+# mi tavla ko
+# ko kurji ko
+# ko ko kurji

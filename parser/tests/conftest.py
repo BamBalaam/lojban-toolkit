@@ -12,7 +12,7 @@ def sentences():
     chapter_files = os.listdir(os.path.join(__location__, "sentences"))
 
     # WIP
-    chapter_files = ["chapter_2.txt"]
+    #chapter_files = ["chapter_2.txt"]
 
     sentences = []
     for chap_file in chapter_files:
