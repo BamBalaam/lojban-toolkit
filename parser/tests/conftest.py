@@ -14,7 +14,7 @@ def sentences():
     # WIP
     #chapter_files = ["chapter_2.txt"]
 
-    sentences = []
+    collected_sentences = []
     for chap_file in chapter_files:
         file_path = os.path.join(__location__, f"sentences/{chap_file}")
         # Filename to chapter name (e.g. chapter_2.txt -> Chapter 2)
@@ -28,9 +28,9 @@ def sentences():
                 # Ignore comments grouping sentences by subsection
                 # and whitespaces
                 if sentence[0] != "#" and sentence.strip() != '':
-                    sentences.append((chapter_number, line_number, sentence.strip()))
+                    collected_sentences.append((chapter_number, line_number, sentence.strip()))
                 line_number += 1
-    return sentences
+    return collected_sentences
 
 
 @pytest.fixture(params=sentences())

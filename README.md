@@ -7,7 +7,7 @@ This repository is the code aspect of the Master Thesis found at https://github.
 ## Run tests
 
 ```
-make test
+make tests
 ```
 
 https://tomassetti.me/parsing-in-python/
