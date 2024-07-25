@@ -1,6 +1,6 @@
 import pytest
 
-from parser.gentufa import Gentufa
+from parser import Gentufa
 from parsimonious.exceptions import IncompleteParseError, ParseError
 
 parser = Gentufa()
