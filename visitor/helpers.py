@@ -1,8 +1,6 @@
-pronouns_definition = {
-    "mi": "I/me, we/us",
-    "do": "You",
-    "ti": "This, these",
-    "ta": "That, those",
-    "tu": "That far away, those far away",
-    "zo'e": "Unspecified value",
-}
+def add_functions_as_methods(functions):
+    def decorator(Class):
+        for function in functions:
+            setattr(Class, function.__name__, function)
+        return Class
+    return decorator
