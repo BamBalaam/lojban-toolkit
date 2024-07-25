@@ -1,8 +1,8 @@
 from parsimonious.grammar import NodeVisitor
 
 from dictionary import Jbovlaste
-from parser import Gentufa
-import visitor.visitor_functions as visitor_functions
+from grammar_parser import Gentufa
+from visitor import visitor_functions
 from .helpers import add_functions_as_methods
 
 
