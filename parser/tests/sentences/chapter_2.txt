@@ -1,72 +1,151 @@
-# Chapter 2.3
-la meris
-la djan
-
 # Chapter 2.5
+# Example 2.11
 mi tavla do zo'e zo'e
+# Example 2.12
 do tavla mi ta zo'e
+# Example 2.13
 mi tavla zo'e tu ti
-mi cu tavla zo'e tu ti
+# Example 2.14
 mi tavla do
+# Example 2.15
 do tavla mi ta
 
 # Chapter 2.6
+# Example 2.16
 mi cu vecnu ti ta zo'e
+# Example 2.17
 mi ti cu vecnu ta
+# Example 2.18
 mi ti ta cu vecnu
+# Example 2.19
 ta cu melbi
+# Example 2.20
 cu melbi
 
 # Chapter 2.7
+# Example 2.21
 mi tavla do ti
+# Example 2.22
 do se tavla mi ti
+# Example 2.23
 mi tavla do ti
+# Example 2.24
 ti te tavla do mi
 
 # Chapter 2.9
+# Example 2.25
 sutra tavla
+# Example 2.27
 sutra tavla cutci
+# Example 2.29
 bajra cutci
+# Example 2.30
 sutra tavla
+# Example 2.31
 jikca toldi
+# Example 2.32
 mi cu sutra klama la meris
+# Example 2.33
 mi cu sutra se klama la meris
+# Example 2.34
 la tam cu melbi tavla la meris
+# Example 2.35
 la meris cu melbi se tavla la tam
+# Example 2.36
 la tam cu tavla melbi la meris
+# Example 2.37
 la tam cu se tavla melbi la meris
 
 # Chapter 2.10
+# Example 2.38
 mi tavla do le tavla ku
+# Example 2.40
 mi tavla do le tavla
+# Example 2.41
 le sutra tavla
+# Example 2.42
 le sutra cu tavla
+# Example 2.43
 le sutra se tavla
+# Example 2.44
 le sutra cu se tavla
+# Example 2.45
 mi cu tavla le vecnu ku le blari'o ku
 
 # Chapter 2.11
+# Example 2.46
 mi cu klama ti zo'e zo'e ta
+# Example 2.47
 ta cu blari'o
+# Example 2.48
 ti cu djarspageti
-# skipping this sentence as go'i is covered mostly in Chapter 7 - ta cu go'i
+# Example 2.49
+# skipping this sentence as go'i is covered mostly in Chapter 7
+# ta cu go'i
 
 # Chapter 2.12
+# Example 2.50
 le gerku ku cu melbi
+# Example 2.51
 ti cu pluka mi
-# skipping this sentence as di'u is covered mostly in Chapter 7 - di'u cu pluka mi
-# skipping this sentence as di'u is covered mostly in Chapter 7 - la'e di'u cu pluka mi
+# Example 2.52
+# skipping this sentence as di'u is covered mostly in Chapter 7
+# di'u cu pluka mi
+# Example 2.53
+# skipping this sentence as di'u is covered mostly in Chapter 7
+# la'e di'u cu pluka mi
 
 # Chapter 2.13
-# skipping this sentence as possession is covered mostly in Chapter 8 - le mi gerku cu sutra
+# Example 2.54
+# skipping this sentence as possession is covered mostly in Chapter 8
+# le mi gerku cu sutra
 
 # Chapter 2.14
+# Example 2.55
 # doi djan
+# Example 2.56
 # coi. djan
+# Example 2.57
 # co'o. djan
+# Example 2.58
 # do tavla
+# Example 2.59
 # ko tavla
+# Example 2.60
 # ko sutra
+# Example 2.61
 # mi tavla ko
+# Example 2.62
 # ko kurji ko
+# Example 2.63
 # ko ko kurji
+
+# Chapter 2.15
+# Example 2.64
+ma tavla do mi
+# Example 2.66
+do cu tavla ma
+# Example 2.67
+ma cu tavla ma
+# Example 2.68
+do cu mo
+# Example 2.69
+mi cu melbi
+# Example 2.70
+mi cu tavla
+# Example 2.73
+xu do tavla mi
+# Example 2.74
+xu do kanro
+# Example 2.75
+mi kanro
+# Example 2.77
+le tavla cu kanro
+# Example 2.78
+le tacla cu go'i
+
+# Chapter 2.16
+
+# Chapter 2.17
+la djan. pu klama le zarci
+la djan. ca klama le zarci

@@ -22,9 +22,14 @@ class Gentufa:
         # Augment grammar text with dictionary words
         tags = re.findall(r"\{\{(.*?)\}\}", grammar_text)
         for tag in tags:
-            words = '" / "'.join(dictionary[tag].keys())
-            words = '"' + words + '"\n' # this join method doesn't add the initial double quotes
-            grammar_text = grammar_text.replace("{{{{{0}}}}}".format(tag), words) # replace tag with dictionary words
+            words = dictionary[tag].keys()
+            replacement_to_tag = ""
+            for word in words:
+                replacement_to_tag += f'( "{word}" _ ) / '
+            # clear last element adding an unused "/ "
+            replacement_to_tag = replacement_to_tag[:-3]
+            # replace tag with dictionary words
+            grammar_text = grammar_text.replace("{{{{{0}}}}}".format(tag), replacement_to_tag)
         self.grammar = Grammar(grammar_text)
 
     def get_parsed_sentence(self, sentence):

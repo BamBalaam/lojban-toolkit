@@ -9,10 +9,10 @@ def sentences():
     )
 
     # Get all files with the Lojban sentences to test the parser against
-    chapter_files = os.listdir(os.path.join(__location__, "sentences"))
+    #chapter_files = os.listdir(os.path.join(__location__, "sentences"))
 
     # WIP
-    #chapter_files = ["chapter_2.txt"]
+    chapter_files = ["chapter_2.txt", "chapter_3.txt", "chapter_18.txt"]
 
     collected_sentences = []
     for chap_file in chapter_files:

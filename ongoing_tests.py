@@ -1,17 +1,7 @@
-from parser.gentufa import Gentufa
-from visitor.visualise import GentufaVisualisor
+import json
 
-from pprint import pprint
+from visitor.visitor import GentufaVisitor
 
-parser = Gentufa()
-#tree = parser.get_parsed_sentence("ci pi pa vo pa mu")
-
-test = parser.get_parsed_sentence("mi tavla do le tavla ku")
-
-print(test)
-
-import pdb; pdb.set_trace()
-
-output = GentufaVisualisor("mi tavla do le tavla ku")
-#output = visitor.visit(tree)
-#print(output.sentence)
+sentence = "la meris cu melbi se tavla la tam"
+output = GentufaVisitor(sentence).get_output()
+print(json.dumps(output))

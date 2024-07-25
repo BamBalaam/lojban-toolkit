@@ -1,64 +1,68 @@
-from parsimonious.grammar import RuleVisitor
-from parsimonious.nodes import rule
+from parsimonious.grammar import NodeVisitor
 
-from parsimonious.expressions import Quantifier, Sequence, OneOf, Regex
-
-from parser.gentufa import Gentufa
 from dictionary.jbovlaste import Jbovlaste
+from parser.gentufa import Gentufa
+from visitor.helpers import pronouns_definition
 
 
-class GentufaVisitor(RuleVisitor):
+class GentufaVisitor(NodeVisitor):
 
     def __init__(self, text):
-        self.sentence = ""
         self.dictionary = Jbovlaste()
         self.ast = Gentufa().get_parsed_sentence(text)
+        self.output = {"sentence": text, "segments" : []}
+        print(self.ast)
         self.visit(self.ast)
 
-    def visit_MI(self, node, visited_children):
-        return "I/me, we/us "
+    def get_output(self):
+        return self.output
 
-    def visit_DO(self, node, visited_children):
-        return "You "
+    def visit_SENTENCE(self, node, visited_children):
+        for child in visited_children[0]:
+            self.output["segments"].append(child)
+        return
 
-    def visit_RE(self, node, visited_children):
-        return "2"
+    def visit_LOJBAN_WORDS_OR_EXPRESSIONS(self, node, visited_children):
+        return visited_children[0]
 
-    def visit_CI(self, node, visited_children):
-        return "3"
+    def visit_PRONOUNS(self, node, visited_children):
+        literal = visited_children[0][0].text
+        return {
+            literal: {"definition": pronouns_definition[literal], "type": "cmavo (pronoun)"}
+        }
 
-    def visit_PI(self, node, visited_children):
-        return "."
+    def visit_BRIVLA(self, node, visited_children):
+        return visited_children[0]
 
-    def visit_PA(self, node, visited_children):
-        return "1"
+    def visit_BRIVLA_WITH_OR_WITHOUT_MODIFIERS(self, node, visited_children):
+        return visited_children[0]
 
-    def visit_VO(self, node, visited_children):
-        return "4"
-
-    def visit_MU(self, node, visited_children):
-        return "5"
-
-    def visit_KI_O(self, node, visited_children):
-        return ","
-
-    def visit_NI_U(self, node, visited_children):
-        return "-"
-
-    def visit_space(self, node, visited_children):
-        return " "
-
-    def visit_SENTENCES(self, node, visited_children):
-        #import pdb; pdb.set_trace()
-        #for item in node.children:
-        pass
+    def visit_BRIVLA_WITH_CU(self, node, visited_children):
+        node_text = node.text.strip()
+        return {
+            node_text: {
+                "type": "brivla with cu separator",
+                "segments": [
+                    {
+                        "cu": {"definition": "selbri separator", "type": "cmavo"}
+                    },
+                    visited_children[2][0]
+                ]
+            }
+        }
 
     def visit_GISMU(self, node, visited_children):
-        # import pdb; pdb.set_trace()
-        pass
+        literal = visited_children[0][0].text
+        return {
+            literal: self.dictionary.get_word_struct(literal)
+        }
 
-    def visit_POSSIBLE_GISMU(self, node, visited_children):
-        self.sentence += self.dictionary.get_word(node.text)['glosswords'][0]['word'] + " "
+    def visit_NAMED_ENTITY(self, node, visited_children):
+        node_text = node.text.strip()
+        return {
+            node_text: {"type": "named entity"}
+        }
 
     def generic_visit(self, node, visited_children):
-        pass
+        """ The generic visit method. """
+        return visited_children or node
