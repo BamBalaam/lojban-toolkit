@@ -4,7 +4,7 @@ import sys
 
 from parsimonious.grammar import Grammar
 
-from dictionary.jbovlaste import Jbovlaste
+from dictionary import Jbovlaste
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 

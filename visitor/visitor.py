@@ -1,6 +1,6 @@
 from parsimonious.grammar import NodeVisitor
 
-from dictionary.jbovlaste import Jbovlaste
+from dictionary import Jbovlaste
 from parser.gentufa import Gentufa
 from visitor.helpers import pronouns_definition
 

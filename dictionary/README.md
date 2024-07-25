@@ -9,11 +9,11 @@ Words include a type, definition, and optional glosswords in the target language
 Module can either be imported in other python files
 
 ```
-from dictionary.jbovlaste import Jbovlaste
+from dictionary import Jbovlaste
 
 dict_instance = Jbovlaste()
 
-print(dict_instance.get_word('blanu'))
+print(dict_instance.get_word_struct('blanu'))
 # OR
 print(dict_instance.get_word_pretty('blanu'))
 
@@ -24,10 +24,6 @@ or run as-is
 `python dictionary/jbovlaste.py <word to search>`
 
 (will run the function `get_word_pretty()` by default)
-
-## TODO LIST
-
-- [ ] Error Handling
 
 ## Citation / External sources
 
