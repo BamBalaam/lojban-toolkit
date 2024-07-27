@@ -8,23 +8,27 @@
 # This allows the PEG to focus less on the morphology of words and more on the
 # structure of Lojban sentences, grammar, modifiers, etc.
 
-##################################################
-# Base Grammar - Where the parsing magic happens #
-##################################################
+##############################################
+# Chapter 2 - A Quick Tour of Lojban Grammar #
+##############################################
 
 # Sentences
 SENTENCE = (LOJBAN_WORDS_OR_EXPRESSIONS)+ EOL
 
-# Verbs
+# Helpers
+_ = ~r"\s+" # represents a space, to be used at each "leaf"
+EOL = "EOL" # represents the end of the line
+
+# Predicate words
 BRIVLA = GISMU / LUJVO / FUhIVLA
 
-# Core Verbs
+# Core brivla
 GISMU = {{gismu}}
 
-# Verbs made of affixes
+# Brivla made of affixes
 LUJVO = {{lujvo}}
 
-# Borrowed verbs + Loan words
+# Brivla which are borrowed verbs or loan words
 FUhIVLA = {{fu'ivla}}
 
 # Name words
@@ -34,43 +38,40 @@ CMEVLA = {{cmevla}}
 # CMAVO = A_SELMAhO / BAI_SELMAhO / BAhE_SELMAhO / BE_SELMAhO / BEI_SELMAhO / BEhO_SELMAhO / BIhE_SELMAhO / BIhI / BO / BOI / BU / BY / CAhA / CAI / CEI / CEhE / CO / COI / CU / CUhE / DAhO / DOI / DOhU / FA_SELMAhO / FAhA / FAhO / FEhE / FEhU / FIhO / FOI / FUhA / FUhE / FUhO / GA / GAhO / GEhU / GI / GIhA / GOI / GOhA / GUhA / I / JA / JAI / JOhI / JOI / KE / KEhE / KEI / KI / KOhA / KU / KUhE / KUhO / LA / LAU / LAhE / LE / LEhU / LI / LIhU / LOhO / LOhU / LU / LUhU / MAhO / MAI / ME / MEhU / MOhE / MOhI / MOI / NA / NAI / NAhE / NAhU / NIhE / NIhO / NOI / NU / NUhA / NUhI / NUhU / PA / PEhE / PEhO / PU / RAhO / ROI / SA / SE / SEI / SEhU / SI / SOI / SU / TAhE / TEhU / TEI / TO / TOI / TUhE / TUhU / UI / VA / VAU / VEI / VEhO / VUhU / VEhA / VIhA / VUhO / XI / ZAhO / ZEhA / ZEI / ZI / ZIhE / ZO / ZOI / ZOhU
 CMAVO = MA / MO / XU
 
-# Helpers
-_ = ~r"\s+" # represents a space, to be used at each "leaf"
-EOL = "EOL" # represents the end of the line
-
 # Modifiers
-CONVERT_BRIVLA_TO_NOUN = "lo" _ BRIVLA _ "ku"
-LOJBAN_WORDS_OR_EXPRESSIONS = CMAVO_WITH_OR_WITHOUT_MODIFIERS / BRIVLA_WITH_OR_WITHOUT_MODIFIERS / PRONOUNS / NAMED_ENTITY # / MEKSO
-BRIVLA_WITH_OR_WITHOUT_MODIFIERS = BRIVLA / TANRU / BRIVLA_WITH_CU / BRIVLA_WITH_SE_FAMILY / CONVERT_BRIVLA_TO_NOUN / DESCRIPTION_BRIVLA / BRIVLA_WITH_TENSES
-CMAVO_WITH_OR_WITHOUT_MODIFIERS = CMAVO / CMAVO_WITH_CU
-
-##############################################
-# Chapter 2 - A Quick Tour of Lojban Grammar #
-##############################################
+LO = "lo" _
+KU = "ku" _
+CONVERT_BRIVLA_TO_NOUN = LO BRIVLA KU
+LOJBAN_WORDS_OR_EXPRESSIONS = CMAVO_WITH_OR_WITHOUT_MODIFIERS / BRIVLA_WITH_OR_WITHOUT_MODIFIERS / PRONOUNS / NAMED_ENTITY / MEKSO
+BRIVLA_WITH_OR_WITHOUT_MODIFIERS = TANRU / BRIVLA_WITH_CU / BRIVLA_WITH_SE_FAMILY / CONVERT_BRIVLA_TO_NOUN / DESCRIPTION_BRIVLA / BRIVLA_WITH_TENSES / BRIVLA
+CMAVO_WITH_OR_WITHOUT_MODIFIERS = CMAVO_WITH_CU / CMAVO
 
 # Pronouns (Chapter 2.3)
-MI = "mi" _ # I/me, we/us
-DO = "do" _ # You
-TI = "ti" _ # This, these
-TA = "ta" _ # That, those
-TU = "tu" _ # That far away, those far away
-ZO_E = "zo'e" _ # Unspecified value
-PRONOUNS = (MI / DO / TI / TA / TU / ZO_E)
+PRONOUNS = (MI / DO / TI / TA / TU / ZOhE)
+MI = "mi" _     # I/me, we/us
+DO = "do" _     # You
+TI = "ti" _     # This, these
+TA = "ta" _     # That, those
+TU = "tu" _     # That far away, those far away
+ZOhE = "zo'e" _ # Unspecified value
 
 # Named entity (Chapter 2.3)
-NAMED_ENTITY = "la" _ ~r"[A-Za-z]+" "."? _
+LA = "la" _
+CMENE = (~r"[A-Za-z]+")+ "."? _
+NAMED_ENTITY = LA CMENE
 
 # Separator (Chapter 2.5)
-BRIVLA_WITH_CU = "cu" _ (BRIVLA / BRIVLA_WITH_SE_FAMILY)
-CMAVO_WITH_CU = "cu" _ CMAVO
+BRIVLA_WITH_CU = CU (BRIVLA_WITH_SE_FAMILY / BRIVLA)
+CMAVO_WITH_CU = CU CMAVO
+CU = "cu" _
 
 # Varying order of sumti (aka "SE SELMA'O") (Chapter 2.7)
-SE = "se"
-TE = "te"
-VE = "ve"
-XE = "xe"
+SE = "se" _
+TE = "te" _
+VE = "ve" _
+XE = "xe" _
 SE_SELMAhO = SE / TE / VE / XE
-BRIVLA_WITH_SE_FAMILY = SE_SELMAhO _ BRIVLA
+BRIVLA_WITH_SE_FAMILY = SE_SELMAhO BRIVLA
 
 # Separating paragraphs (Chapter 2.8)
 NI_O = "ni'o"
@@ -79,32 +80,39 @@ NI_O = "ni'o"
 I = ".i"
 
 # Tanru (Chapter 2.9)
-TANRU = (BRIVLA _)+
+TANRU = (BRIVLA)+
 
 # Description brivla (Chapter 2.10)
-DESCRIPTION_BRIVLA = "le" _ BRIVLA _ "ku"?
+LE = "le" _
+DESCRIPTION_BRIVLA = LE BRIVLA KU?
 
 # Asking questions: cmavo "ma" and "mo (Chapter 2.16)
-MA = "ma"
-MO = "mo"
-XU = "xu"
+MA = "ma" _
+MO = "mo" _
+XU = "xu" _
 
 # Tenses (Chapter 2.17)
-PU = "pu"
-CA = "ca"
-BA = "ba"
-BRIVLA_WITH_TENSES = (PU / CA / BA) _ BRIVLA
+PU = "pu" _
+CA = "ca" _
+BA = "ba" _
+BRIVLA_WITH_TENSES = (PU / CA / BA) BRIVLA
 
 # Location (Chapter 2.17)
-VU = "vu"
-VI = "vi"
-BRIVLA_WITH_LOCATION = (VU / VI) _ BRIVLA
+VU = "vu" _
+VI = "vi" _
+BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
+
+################################################
+# Chapter 3 - Lojban Orthography and Phonetics #
+################################################
+
+# This chapter focuses on subjects other than the grammar, so no rules to add here
 
 #################################
 # Chapter 4 - Lojban Morphology #
 #################################
 
-# ZEI = BRIVLA _ "zei" _ BRIVLA
+# ZEI = BRIVLA "zei" BRIVLA
 
 ##############################################
 # Chapter 5 - The Structure Of Lojban selbri #
@@ -321,59 +329,57 @@ BRIVLA_WITH_LOCATION = (VU / VI) _ BRIVLA
 # Chapter 18 - Mathematical Expressions #
 #########################################
 
-#MEKSO = (NUMERAL _)+ / EQUATION
+MEKSO = (NUMERAL)+ / EQUATION
 
-#NUMERAL = (modifierAllowedBeforeNumber _)? (DIGIT _)* (MODIFIER _)? (DIGIT _)* (PERCENTAGE _)?
-#EQUATION = EQUATION_PART _ DU _ EQUATION_PART
-#EQUATION_PART = "li" _ (MEKSO _)* ( (OPERATOR _)+ (MEKSO _)+ )*
+NUMERAL = (modifierAllowedBeforeNumber)? (DIGIT (MODIFIER)? (DIGIT)*)+ (PERCENTAGE)?
+EQUATION = EQUATION_PART _ DU EQUATION_PART
+EQUATION_PART = "li" _ (MEKSO)* ( (OPERATOR)+ (MEKSO)+ )*
 
 # Digits (Chapter 18.2)
-
-#PA = "pa"        # 1
-#RE = "re"        # 2
-#CI = "ci"        # 3
-#VO = "vo"        # 4
-#MU = "mu"        # 5
-#XA = "xa"        # 6
-#ZE = "ze"        # 7
-#BI = "bi"        # 8
-#SO = "so"        # 9
-#NO = "no"        # 0
-
-#DIGIT = (SIGN _)? (SPECIAL_NUMBERS / PA / RE / CI / VO / MU / XA / ZE / BI / SO / NO)
+DIGIT = (SIGN)? (SPECIAL_NUMBERS / PA / RE / CI / VO / MU / XA / ZE / BI / SO / NO)
+PA = "pa" _      # 1
+RE = "re" _      # 2
+CI = "ci" _      # 3
+VO = "vo" _      # 4
+MU = "mu" _      # 5
+XA = "xa" _      # 6
+ZE = "ze" _      # 7
+BI = "bi" _      # 8
+SO = "so" _      # 9
+NO = "no" _      # 0
 
 # Signs and numerical punctuation (Chapter 18.3)
-#MA_U = "ma'u"    # positive sign
-#NI_U = "ni'u"    # negative sign
-#PI = "pi"        # decimal point
-#FI_U = "fi'u"    # fraction slash
-#RA_E = "ra'e"    # repeating decimal
-#KI_O = "ki'o"    # comma between digits
-#CEHI = "ce'i"    # percent sign
-#SIGN = MA_U / NI_U
-#MODIFIER = PI / FI_U / RA_E / KI_O
-#modifierAllowedBeforeNumber = PI / FI_U / SIGN
-#PERCENTAGE = CEHI
+SIGN = MA_U / NI_U
+MODIFIER = PI / FI_U / RA_E / KI_O
+modifierAllowedBeforeNumber = PI / FI_U / SIGN
+PERCENTAGE = CEHI
+
+MA_U = "ma'u" _  # positive sign
+NI_U = "ni'u" _  # negative sign
+PI = "pi" _      # decimal point
+FI_U = "fi'u" _  # fraction slash
+RA_E = "ra'e" _  # repeating decimal
+KI_O = "ki'o" _  # comma between digits
+CEHI = "ce'i" _  # percent sign
 
 # Special numbers (Chapter 18.4)
-#CI_I = "ci'i"    # infinity
-#KA_O = "ka'o"    # imaginary i
-#PAI = "pai"      # pi
-#TE_O = "te'o"    # exponential e
-#FI_U = "fi'u"    # phi
-#SPECIAL_NUMBERS = (CI_I / KA_O / PAI / TE_O / FI_U)
+SPECIAL_NUMBERS = (CI_I / KA_O / PAI / TE_O / FI_U)
+CI_I = "ci'i" _  # infinity
+KA_O = "ka'o" _  # imaginary i
+PAI = "pai" _    # pi
+TE_O = "te'o" _  # exponential e
+FI_U = "fi'u" _  # phi
 
 # Infix expressions and equations (Chapter 18.5)
-#DU = "du"       # equals
-#SU_I = "su'i"   # plus
-#VU_U = "vu'u"   # minus
-#PI_I = "pi'i"   # times
-#TE_A = "te'a"   # raised to the power
-#NY = "ny."      # letter "n”
-#VEI = "vei"     # left parenthesis
-#VE_O = "ve'o"   # right parenthesis
-
-#OPERATOR = SU_I / VU_U / PI_I
+OPERATOR = SU_I / VU_U / PI_I
+DU = "du" _      # equals
+SU_I = "su'i" _  # plus
+VU_U = "vu'u" _  # minus
+PI_I = "pi'i" _  # times
+TE_A = "te'a" _  # raised to the power
+NY = "ny." _     # letter "n”
+VEI = "vei" _    # left parenthesis
+VE_O = "ve'o" _  # right parenthesis
 
 # BIhE_SELMAhO = " "
 
@@ -422,9 +428,8 @@ BRIVLA_WITH_LOCATION = (VU / VI) _ BRIVLA
 # Contrastive Emphasis: Selma'o BAhE
 
 BAhE_SELMAhO = BAhE / ZAhE
-
-BAhE = "ba'e"
-ZAhE = "za'e"
+BAhE = "ba'e" _
+ZAhE = "za'e" _
 
 # FAhO = " "
 
