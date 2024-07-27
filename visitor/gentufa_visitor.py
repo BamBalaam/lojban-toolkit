@@ -12,7 +12,7 @@ class GentufaVisitor(NodeVisitor):
     def __init__(self, text):
         self.dictionary = Jbovlaste()
         self.ast = Gentufa().get_parsed_sentence(text)
-        self.output = {"sentence": text, "segments" : []}
+        self.output = {"sentence": text, "segments": []}
         print(self.ast)
         self.visit(self.ast)
 
@@ -20,5 +20,5 @@ class GentufaVisitor(NodeVisitor):
         return self.output
 
     def generic_visit(self, node, visited_children):
-        """ The generic visit method. """
+        """The generic visit method."""
         return visited_children or node

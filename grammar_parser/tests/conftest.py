@@ -9,7 +9,7 @@ def sentences():
     )
 
     # Get all files with the Lojban sentences to test the parser against
-    #chapter_files = os.listdir(os.path.join(__location__, "sentences"))
+    # chapter_files = os.listdir(os.path.join(__location__, "sentences"))
 
     # WIP
     chapter_files = ["chapter_2.txt", "chapter_3.txt", "chapter_18.txt"]
@@ -27,8 +27,10 @@ def sentences():
             for sentence in f.readlines():
                 # Ignore comments grouping sentences by subsection
                 # and whitespaces
-                if sentence[0] != "#" and sentence.strip() != '':
-                    collected_sentences.append((chapter_number, line_number, sentence.strip()))
+                if sentence[0] != "#" and sentence.strip() != "":
+                    collected_sentences.append(
+                        (chapter_number, line_number, sentence.strip())
+                    )
                 line_number += 1
     return collected_sentences
 

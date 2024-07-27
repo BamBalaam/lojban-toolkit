@@ -29,11 +29,15 @@ class Gentufa:
             # clear last element adding an unused "/ "
             replacement_to_tag = replacement_to_tag[:-3]
             # replace tag with dictionary words
-            grammar_text = grammar_text.replace("{{{{{0}}}}}".format(tag), replacement_to_tag)
+            grammar_text = grammar_text.replace(
+                "{{{{{0}}}}}".format(tag), replacement_to_tag
+            )
         self.grammar = Grammar(grammar_text)
 
     def get_parsed_sentence(self, sentence):
-        sentence = sentence + " EOL" # Adding end of line indicator to avoid parsing issues
+        sentence = (
+            sentence + " EOL"
+        )  # Adding end of line indicator to avoid parsing issues
         return self.grammar.parse(sentence)
 
 

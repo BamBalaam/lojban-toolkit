@@ -5,9 +5,9 @@ import xml.etree.ElementTree as ET
 
 class Jbovlaste:
     """
-    Creates an object which allows to fetch Lojban words .
-    These words 
-    Parses all words in the official Jbovlaste ("dictionary" in Lojban).
+    Creates an object which allows to fetch Lojban words.
+    Gathers all words by parsing an XML export of the official
+    La Jbovlaste ("dictionary" in Lojban).
     Words include:
         - a type
         - a definition
@@ -30,7 +30,9 @@ class Jbovlaste:
                 self._dictionary[valsi_type] = {}
 
             self._dictionary[valsi_type][valsi] = {}
-            self._dictionary[valsi_type][valsi]["definition"] = word.find("definition").text
+            self._dictionary[valsi_type][valsi]["definition"] = word.find(
+                "definition"
+            ).text
 
             self._dictionary[valsi_type][valsi]["glosswords"] = []
             glosswords = word.findall("glossword")
@@ -39,7 +41,8 @@ class Jbovlaste:
                 sense = element.attrib.get("sense")
                 self._dictionary[valsi_type][valsi]["glosswords"].append(
                     {
-                        "word": glossword, "sense": sense,
+                        "word": glossword,
+                        "sense": sense,
                     }
                 )
 
@@ -75,11 +78,7 @@ class Jbovlaste:
 
     def decompose_definition(self, definition):
         arguments = re.findall(r"\$.*?\$", definition)
-        return {
-            "definition": definition,
-            "max_args": len(arguments),
-            "args": arguments
-        }
+        return {"definition": definition, "max_args": len(arguments), "args": arguments}
 
     def get_definition_objects_list(self, word):
         definition = self.get_word_struct(word)["definition"]
