@@ -1,250 +1,308 @@
-# This PEG does not work as a standalone grammar importable by any software.
+# This PEG does not work as a standalone grammar importable by any random software,
+# as it has has elements which are augmented by an external script.
 # It is an experimental grammar written in the context of a Master Thesis
 # (see https://github.com/BamBalaam/master-thesis)
 #
-# This PEG has elements which are augmented by an external script:
 # All tags surrounded by curly braces ( { } ) are replaced by a list of words in a dictionary.
+# This allows the PEG to focus less on the morphology of Lojban and validating all possible
+# words in existence, and focus instead on the structure of Lojban sentences, grammar, modifiers, etc.
 #
-# This allows the PEG to focus less on the morphology of words and more on the
-# structure of Lojban sentences, grammar, modifiers, etc.
+# Grammar explanations are sometimes direct citations of "The Complete Lojban Language" (Version 1.1)
+# by John Woldemar Cowan, published by the "Logical Language Group".
+# Some grammar notions are first introduced in Chapter 2 of "The Complete Lojban Language", as it presents a broad
+# overview of the language. However, they are explored in much more detail in later chapters, and thus will
+# be referenced as "appearing" in those chapters in this grammar.
 
-##############################################
-# Chapter 2 - A Quick Tour of Lojban Grammar #
-##############################################
+##################
+# PEG Base Rules #
+##################
 
-# Sentences
+# Sentences: one or more lojban words/expressions, followed by an EOL marker to facilitate parsing
 SENTENCE = (LOJBAN_WORDS_OR_EXPRESSIONS)+ EOL
 
-# Helpers
-_ = ~r"\s+" # represents a space, to be used at each "leaf"
-EOL = "EOL" # represents the end of the line
+# Grammar Helpers
+# _ represents a space in the sentence, and is to be used at each "leaf" of the grammar
+_ = ~r"\s+"
+# EOL represents the end of the text to parse
+EOL = "EOL"
 
-# Predicate words
-BRIVLA = GISMU / LUJVO / FUhIVLA
-
-# Core brivla
-GISMU = {{gismu}}
-
-# Brivla made of affixes
-LUJVO = {{lujvo}}
-
-# Brivla which are borrowed verbs or loan words
-FUhIVLA = {{fu'ivla}}
-
-# Name words
-CMEVLA = {{cmevla}}
-
-# Particles + Structure Words
-# CMAVO = A_SELMAhO / BAI_SELMAhO / BAhE_SELMAhO / BE_SELMAhO / BEI_SELMAhO / BEhO_SELMAhO / BIhE_SELMAhO / BIhI / BO / BOI / BU / BY / CAhA / CAI / CEI / CEhE / CO / COI / CU / CUhE / DAhO / DOI / DOhU / FA_SELMAhO / FAhA / FAhO / FEhE / FEhU / FIhO / FOI / FUhA / FUhE / FUhO / GA / GAhO / GEhU / GI / GIhA / GOI / GOhA / GUhA / I / JA / JAI / JOhI / JOI / KE / KEhE / KEI / KI / KOhA / KU / KUhE / KUhO / LA / LAU / LAhE / LE / LEhU / LI / LIhU / LOhO / LOhU / LU / LUhU / MAhO / MAI / ME / MEhU / MOhE / MOhI / MOI / NA / NAI / NAhE / NAhU / NIhE / NIhO / NOI / NU / NUhA / NUhI / NUhU / PA / PEhE / PEhO / PU / RAhO / ROI / SA / SE / SEI / SEhU / SI / SOI / SU / TAhE / TEhU / TEI / TO / TOI / TUhE / TUhU / UI / VA / VAU / VEI / VEhO / VUhU / VEhA / VIhA / VUhO / XI / ZAhO / ZEhA / ZEI / ZI / ZIhE / ZO / ZOI / ZOhU
-CMAVO = MA / MO / XU
-
-# Modifiers
-LO = "lo" _
-KU = "ku" _
-CONVERT_BRIVLA_TO_NOUN = LO BRIVLA KU
-LOJBAN_WORDS_OR_EXPRESSIONS = CMAVO_WITH_OR_WITHOUT_MODIFIERS / BRIVLA_WITH_OR_WITHOUT_MODIFIERS / PRONOUNS / NAMED_ENTITY / MEKSO
+LOJBAN_WORDS_OR_EXPRESSIONS = CMAVO_WITH_OR_WITHOUT_MODIFIERS / BRIVLA_WITH_OR_WITHOUT_MODIFIERS / NAMED_ENTITY / MEKSO
 BRIVLA_WITH_OR_WITHOUT_MODIFIERS = TANRU / BRIVLA_WITH_CU / BRIVLA_WITH_SE_FAMILY / CONVERT_BRIVLA_TO_NOUN / DESCRIPTION_BRIVLA / BRIVLA_WITH_TENSES / BRIVLA
 CMAVO_WITH_OR_WITHOUT_MODIFIERS = CMAVO_WITH_CU / CMAVO
 
-# Pronouns (Chapter 2.3)
-PRONOUNS = (MI / DO / TI / TA / TU / ZOhE)
-MI = "mi" _     # I/me, we/us
-DO = "do" _     # You
-TI = "ti" _     # This, these
-TA = "ta" _     # That, those
-TU = "tu" _     # That far away, those far away
-ZOhE = "zo'e" _ # Unspecified value
+#################################
+# Lojban Morphology - Chapter 4 #
+#################################
 
-# Named entity (Chapter 2.3)
-LA = "la" _
+# Lojban has 3 basic parts of speech: cmavo, brivla and cmene
+
+# Cmavo are the structure words that hold the Lojban language together.
+# There are over a hundred subcategories of cmavo (called "selma'o").
+# These will always be prefaced by the "SELMAhO_" identifier in this grammar.
+# At this point in the grammar, the global "CMAVO" identifier will only aggregate all the different
+# grammatical families that exist. For an explanation of what each one of them do, search their
+# names further down.
+
+CMAVO = CMAVO_MA / CMAVO_MO / CMAVO_XU / SELMAhO_ZEI / SELMAhO_KOhA
+
+# Brivla are predicate words. They are the equivalent of nouns, verbs, adjectives and adverbs.
+# This grammar will not focus on defining all possible morphology rules to assemble 
+# (or even create brand new) words, as it is a tool to simplify learning.
+# There are 3 major sub-types, defined by the morphology of the word:
+# gismu: core brivla - represent basic concepts of the language
+# lujvo: brivla made of affixes
+# fu'ivla: brivla which are borrowed verbs or loan words
+
+BRIVLA = GISMU / LUJVO / FUhIVLA
+GISMU = {{gismu}}
+LUJVO = {{lujvo}}
+FUhIVLA = {{fu'ivla}}
+
+# Cmene are words used as a name (things or people)
 CMENE = (~r"[A-Za-z]+")+ "."? _
-NAMED_ENTITY = LA CMENE
 
-# Separator (Chapter 2.5)
-BRIVLA_WITH_CU = CU (BRIVLA_WITH_SE_FAMILY / BRIVLA)
-CMAVO_WITH_CU = CU CMAVO
-CU = "cu" _
+# Cmevla, a subset of cmene, are words sometimes used to create names.
+# Commented out of the grammar as it is an advanced subject which is not present in the reference book.
+# CMEVLA = {{cmevla}}
 
-# Varying order of sumti (aka "SE SELMA'O") (Chapter 2.7)
-SE = "se" _
-TE = "te" _
-VE = "ve" _
-XE = "xe" _
-SE_SELMAhO = SE / TE / VE / XE
-BRIVLA_WITH_SE_FAMILY = SE_SELMAhO BRIVLA
+# ----------------------------------------------------------------------------
 
-# Separating paragraphs (Chapter 2.8)
-NI_O = "ni'o"
-
-# Separating sentences (Chapter 2.8)
-I = ".i"
-
-# Tanru (Chapter 2.9)
-TANRU = (BRIVLA)+
-
-# Description brivla (Chapter 2.10)
-LE = "le" _
-DESCRIPTION_BRIVLA = LE BRIVLA KU?
-
-# Asking questions: cmavo "ma" and "mo (Chapter 2.16)
-MA = "ma" _
-MO = "mo" _
-XU = "xu" _
-
-# Tenses (Chapter 2.17)
-PU = "pu" _
-CA = "ca" _
-BA = "ba" _
-BRIVLA_WITH_TENSES = (PU / CA / BA) BRIVLA
-
-# Location (Chapter 2.17)
-VU = "vu" _
-VI = "vi" _
-BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
-
-################################################
-# Chapter 3 - Lojban Orthography and Phonetics #
-################################################
-
-# This chapter focuses on subjects other than the grammar, so no rules to add here
-
-#################################
-# Chapter 4 - Lojban Morphology #
-#################################
-
-# ZEI = BRIVLA "zei" BRIVLA
+# Selma'o ZEI: join two words to create a lujvo (e.g. "xy. zei kantu" = X-ray)
+# selma'o ZEI (Section 4.6)
+ZEI = "zei" _
+SELMAhO_ZEI = BRIVLA ZEI BRIVLA
 
 ##############################################
 # Chapter 5 - The Structure Of Lojban selbri #
 ##############################################
 
-# BE_SELMAhO = " "
+# Tanru (Chapter 5.2)
+TANRU = (BRIVLA)+
 
-# BEI_SELMAhO = " "
+# selma'o BE (Section 5.7)
+# SELMAhO_BE = ???
 
-# BEhO_SELMAhO = " "
+# selma'o BEI (Section 5.7)
+# SELMAhO_BEI = ""
 
-# CO = " "
+# selma'o BEhO (Section 5.7)
+# SELMAhO_BEhO = ""
 
-# KE = " "
+# selma'o BO (Section 5.3)
+# SELMAhO_BO = ""
 
-# KEhE = " "
+# selma'o CO (Section 5.8)
+# SELMAhO_CO = ""
 
-# ME = " "
+# selma'o KE (Section 5.5)
+# SELMAhO_KE = ""
 
-# MEhU = " "
+# selma'o KEhE (Section 5.5)
+# SELMAhO_KEhE = ""
 
-# MOI = " "
+# selma'o ME (Section 5.10)
+# SELMAhO_ME = ""
 
-# SE = " "
+# selma'o MEhU (Section 5.11)
+# SELMAhO_MEhU = ""
+
+# selma'o MOI (Section 5.11)
+# SELMAhO_MOI = ""
+
+# Varying order of sumti (aka "SE SELMA'O") (Chapter 2.7)
+# selma'o SE (Section 5.11)
+SE = "se" _
+TE = "te" _
+VE = "ve" _
+XE = "xe" _
+SELMAhO_SE = SE / TE / VE / XE
+BRIVLA_WITH_SE_FAMILY = SELMAhO_SE BRIVLA
 
 ################################
 # Chapter 6 - The Lojban sumti #
 ################################
 
-# COI = " "
+# selma'o COI (Section 6.11)
+# SELMAhO_COI = ""
 
-# KU = " "
+# selma'o KU (Section 6.2)
+# SELMAhO_KU = ""
+# Modifiers
+LO = "lo" _
+KU = "ku" _
+CONVERT_BRIVLA_TO_NOUN = LO BRIVLA KU
 
-# LA = " "
+# selma'o LA (Section 6.2)
+SELMAhO_LA = "la" _
+NAMED_ENTITY = SELMAhO_LA CMENE
 
-# LAhE = " "
+# selma'o LAhE (Section 6.10)
+# SELMAhO_LAhE = ""
 
-# LE = " "
+# selma'o LE (Section 6.2)
+SELMAhO_LE = "le" _
+DESCRIPTION_BRIVLA = SELMAhO_LE BRIVLA KU?
 
-# LUhU = " "
+# selma'o LUhU (Section 6.10)
+# SELMAhO_LUhU = ""
 
 #######################################
 # Chapter 7 - Pro-sumti And Pro-bridi #
 #######################################
 
-# CEI = " "
+# Pro-sumti and pro-bridi
+# What are these? The equivalent of "pronouns"
+# Let's explore a few families of these.
 
-# DAhO = " "
+# selma'o KOhA (Section 7.1)
+SELMAhO_KOhA = KOhA_MI_SERIES
 
-# GOhA = " "
+# Personal pronouns aka KohA Cmavo: mi-series (Chapter 2.3 + Chapter 7.16)
+KOhA_MI_SERIES = (MI / DO / TI / TA / TU / ZOhE)
+MI = "mi" _     # I/me, we/us
+MIhO = "mi'o" _ # You and I
+MIhA = "mi'a" _ # I and others, we but not you
+MAhA = "ma'a" _ # You and I and others
+DO = "do" _     # You
+DOhO = "do'o" _ # You and others
+KO = "ko" _     # You - imperative
 
-# KOhA = " "
+TI = "ti" _     # This, these
+TA = "ta" _     # That, those
+TU = "tu" _     # That far away, those far away
+ZOhE = "zo'e" _ # Unspecified value
 
-# RAhO = " "
+# selma'o CEI (Section 7.5)
+# SELMAhO_CEI = ""
 
-# SOI = " "
+# selma'o DAhO (Section 7.13)
+# SELMAhO_DAhO = ""
+
+# selma'o GOhA (Section 7.6)
+# SELMAhO_GOhA = ""
+
+# selma'o RAhO (Section 7.6)
+# SELMAhO_RAhO = ""
+
+# selma'o SOI (Section 7.8)
+# SELMAhO_SOI = ""
 
 ################################
 # Chapter 8 - Relative Clauses #
 ################################
 
-# GEhU = " "
+# selma'o GEhU (Section 8.3)
+# SELMAhO_GEhU = ""
 
-# GOI = " "
+# selma'o GOI (Section 8.3)
+# SELMAhO_GOI = ""
 
-# KUhO = " "
+# selma'o KUhO (Section 8.1)
+# KUhO = ""
 
-# NOI = " "
+# selma'o NOI (Section 8.1)
+# SELMAhO_NOI = ""
 
-# VUhO = " "
+# selma'o VUhO (Section 8.8)
+# SELMAhO_VUhO = ""
 
-# ZIhE = " "
+# selma'o ZIhE (Section 8.4)
+# SELMAhO_ZIhE = ""
 
 ######################
 # Chapter 9 - Modals #
 ######################
 
-# BAI_SELMAhO = " "
+# selma'o BAI (Section 9.6)
+# SELMAhO_BAI = ""
 
-# BO = " "
+# selma'o CU Separator (Section 9.2)
+BRIVLA_WITH_CU = CU (BRIVLA_WITH_SE_FAMILY / BRIVLA)
+CMAVO_WITH_CU = CU CMAVO
+CU = "cu" _
 
-# CU = " "
+# Asking questions: cmavo "ma" and "mo (Section 7.9)
+CMAVO_MA = "ma" _
+CMAVO_MO = "mo" _
 
-# FA_SELMAhO = "fa" / "fe" / "fi" / "fo" / "fu"
+# selma'o FA (Section 9.3)
+# SELMAhO_FA = "fa" / "fe" / "fi" / "fo" / "fu"
 
-# FEhU = " "
+# selma'o FEhU (Section 9.5)
+# SELMAhO_FEhU = ""
 
-# FIhO = " "
+# selma'o FIhO (Section 9.5)
+# SELMAhO_FIhO = ""
 
-# JAI = " "
+# selma'o JAI (Section 9.12)
+# SELMAhO_JAI = ""
 
 ########################################
 # Chapter 10 - Space/Time Tense System #
 ########################################
 
-# CAhA = " "
+# selma'o CAhA (Section 10.19)
+# SELMAhO_CAhA = ""
 
-# CUhE = " "
+# selma'o CUhE (Section 10.24)
+# SELMAhO_CUhE = ""
 
-# FAhA = " "
+# selma'o FAhA (Section 10.2)
+# SELMAhO_FAhA = ""
 
-# FEhE = " "
+# selma'o FEhE (Section 10.11)
+# SELMAhO_FEhE = ""
 
-# KI = " "
+# selma'o KI (Section 10.13)
+# SELMAhO_KI = ""
 
-# MOhI = " "
+# selma'o MOhI (Section 10.8)
+# SELMAhO_MOhI = ""
 
-# PU = " "
+# Tenses (Section 10.4)
+# selma'o PU (Section 10.4)
+PU = "pu" _
+CA = "ca" _
+BA = "ba" _
+BRIVLA_WITH_TENSES = (PU / CA / BA) BRIVLA
 
-# ROI = " "
+# selma'o ROI (Section 10.9)
+# SELMAhO_ROI = ""
 
-# TAhE = " "
+# selma'o TAhE (Section 10.9)
+# SELMAhO_TAhE = ""
 
-# VA = " "
+# selma'o VA (Section 10.2)
+# SELMAhO_VA = ""
+# Location (Chapter 2.17)
+VU = "vu" _
+VI = "vi" _
+BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
 
-# VEhA = " "
+# selma'o VEhA (Section 10.5)
+# SELMAhO_VEhA = ""
 
-# VIhA = " "
+# selma'o VIhA (Section 10.7)
+# SELMAhO_VIhA = ""
 
-# ZAhO = " "
+# selma'o ZAhO (Section 10.10)
+# SELMAhO_ZAhO = ""
 
-# ZEhA = " "
+# selma'o ZEhA (Section 10.5)
+# SELMAhO_ZEhA = ""
 
-# ZI = " "
+# selma'o ZI (Section 10.4)
+# SELMAhO_ZI = ""
 
 ############################
 # Chapter 11 - Abstraction #
 ############################
 
-# KEI = " "
+# selma'o KEI (Section 11.1)
+# SELMAhO_KEI = ""
 
-# NU = " "
+# selma'o NU (Section 11.1)
+# SELMAhO_NU = ""
 
 #######################################
 # Chapter 12 - Lujvo Place Structures #
@@ -254,75 +312,107 @@ BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
 # Chapter 13 - Attitudinal and Emotional Indicators #
 #####################################################
 
-# CAI = " "
+# selma'o CAI (Section 13.4)
+# SELMAhO_CAI = ""
 
-# DOI = " "
+# selma'o DOI (Section 13.14)
+# SELMAhO_DOI = ""
 
-# DOhU = " "
+# selma'o DOhU (Section 13.14)
+# SELMAhO_DOhU = ""
 
-# UI = " "
+# selma'o UI (Section 13.1)
+# SELMAhO_UI = ""
 
 #########################################
 # Chapter 14 - Lojban Connective System #
 #########################################
 
-# A_SELMAhO = &CMAVO ( "a" / "e" / "ji" / "o" / "u" )
+# selma'o A (Section 14.6)
+# SELMAhO_A = ""
 
-# BIhI = " "
+# selma'o BIhI (Section 14.16)
+# SELMAhO_BIhI = ""
 
-# CEhE = " "
+CMAVO_XU = "xu" _
 
-# GA = " "
+# selma'o CEhE (Section 14.11)
+# SELMAhO_CEhE = ""
 
-# GAhO = " "
+# selma'o GA (Section 14.5)
+# SELMAhO_GA = ""
 
-# GI = " "
+# selma'o GAhO (Section 14.16)
+# SELMAhO_GAhO = ""
 
-# GIhA = " "
+# selma'o GI (Section 14.5)
+# SELMAhO_GI = ""
 
-# GUhA = " "
+# selma'o GIhA (Section 14.3)
+# SELMAhO_GIhA = ""
 
-# JA = " "
+# selma'o GUhA (Section 14.3)
+# SELMAhO_GUhA = ""
 
-# JOI = " "
+# selma'o JA (Section 14.3)
+# SELMAhO_JA = ""
 
-# NA = " "
+# selma'o JOI (Section 14.14)
+# SELMAhO_JOI = ""
 
-# NAI = " "
+# selma'o NA (Section 14.3)
+# SELMAhO_NA = ""
 
-# NUhI = " "
+# selma'o NAI (Section 14.3)
+# SELMAhO_NAI = ""
 
-# NUhU = " "
+# selma'o NUhI (Section 14.11)
+# SELMAhO_NUhI = ""
 
-# PEhE = " "
+# selma'o NUhU (Section 14.11)
+# SELMAhO_NUhU = ""
 
-# VAU = " "
+# selma'o PEhE (Section 14.11)
+# SELMAhO_PEhE = ""
+
+# selma'o VAU (Section 14.9)
+# SELMAhO_VAU = ""
 
 #########################
 # Chapter 15 - Negation #
 #########################
 
-# NAhE = " "
+# selma'o NAhE (Section 15.4)
+# SELMAhO_NAhE = ""
 
 ######################
 # Chapter 16 - Logic #
 ######################
 
-# ZOhU = " "
+# selma'o ZOhU (Section 16.2)
+# SELMAhO_ZOhU = ""
 
 #######################################
 # Chapter 17 - Lojban Latteral System #
 #######################################
 
-# BU = " "
+# selma'o BY (Section 17.2)
+# SELMAhO_BY = ""
 
-# BY = " "
+# selma'o BU (Section 17.4)
+# SELMAhO_BU = ""
 
-# FOI = " "
+# selma'o BY (Section 17.2)
+# SELMAhO_BY = ""
 
-# LAU = " "
+# selma'o FOI (Section 17.6)
+# SELMAhO_FOI = ""
 
-# TEI = " "
+# selma'o LAU (Section 17.14)
+# SELMAhO_LAU = ""
+
+# selma'o TEI (Section 17.6)
+# SELMAhO_TEI = ""
 
 
 #########################################
@@ -336,6 +426,7 @@ EQUATION = EQUATION_PART _ DU EQUATION_PART
 EQUATION_PART = "li" _ (MEKSO)* ( (OPERATOR)+ (MEKSO)+ )*
 
 # Digits (Chapter 18.2)
+# selma'o PA (Section 18.2)
 DIGIT = (SIGN)? (SPECIAL_NUMBERS / PA / RE / CI / VO / MU / XA / ZE / BI / SO / NO)
 PA = "pa" _      # 1
 RE = "re" _      # 2
@@ -381,92 +472,131 @@ NY = "ny." _     # letter "n”
 VEI = "vei" _    # left parenthesis
 VE_O = "ve'o" _  # right parenthesis
 
-# BIhE_SELMAhO = " "
+# selma'o BIhE (Section 18.5)
+# SELMAhO_BIhE = ""
 
-# BOI = " "
+# selma'o BOI (Section 18.6)
+# SELMAhO_BOI = ""
 
-# FUhA = " "
+# selma'o FUhA (Section 18.16)
+# SELMAhO_FUhA = ""
 
-# JOhI = " "
+# selma'o JOhI (Section 18.15)
+# SELMAhO_JOhI = ""
 
-# KUhE = " "
+# selma'o KUhE (Section 18.6)
+# SELMAhO_KUhE = ""
 
-# LI = " "
+# selma'o LI (Section 18.5)
+# SELMAhO_LI = ""
 
-# LOhO = " "
+# selma'o LOhO (Section 18.17)
+# SELMAhO_LOhO = ""
 
-# MAI = " "
+# selma'o MAI (Section 18.19)
+# SELMAhO_MAI = ""
 
-# MAhO = " "
+# selma'o MAhO (Section 18.6)
+# SELMAhO_MAhO = ""
 
-# MOhE = " "
+# selma'o MOhE (Section 18.18)
+# SELMAhO_MOhE = ""
 
-# NAhU = " "
+# selma'o NAhU (Section 18.18)
+# SELMAhO_NAhU = ""
 
-# NIhE = " "
+# selma'o NIhE (Section 18.18)
+# SELMAhO_NIhE = ""
 
-# NUhA = " "
+# selma'o NUhA (Section 18.19)
+# SELMAhO_NUhA = ""
 
-# PA = " "
+# selma'o PEhO (Section 18.6)
+# SELMAhO_PEhO = ""
 
-# PEhO = " "
+# selma'o TEhU (Section 18.15)
+# SELMAhO_TEhU = ""
 
-# TEhU = " "
+# selma'o VEI (Section 18.5)
+# SELMAhO_VEI = ""
 
-# VEI = " "
+# selma'o VEhO (Section 19.5)
+# SELMAhO_VEhO = ""
 
-# VEhO = " "
+# selma'o VUhU (Section 18.5)
+# SELMAhO_VUhU = ""
 
-# VUhU = " "
-
-# XI = " "
+# selma'o XI (Section 18.13)
+# SELMAhO_XI = ""
 
 ##########################################
 # Chapter 19 - Structure of Lojban Texts #
 ##########################################
 
-# Contrastive Emphasis: Selma'o BAhE
-
-BAhE_SELMAhO = BAhE / ZAhE
+# Contrastive Emphasis: Selma'o BAhE (Section 19.11)
+SELMAhO_BAhE = BAhE / ZAhE
 BAhE = "ba'e" _
 ZAhE = "za'e" _
 
-# FAhO = " "
+# selma'o FAhO (Section 19.15)
+# SELMAhO_FAhO = ""
 
-# FUhE = " "
+# selma'o FUhE (Section 19.8)
+# SELMAhO_FUhE = ""
 
-# FUhO = " "
+# selma'o FUhO (Section 19.8)
+# SELMAhO_FUhO = ""
 
-# LEhU = " "
+# selma'o I (Section 19.2)
+# SELMAhO_I = ".i" _
 
-# LIhU = " "
+# selma'o LEhU (Section 19.9)
+# SELMAhO_LEhU = ""
 
-# LOhU = " "
+# selma'o LIhU (Section 19.9)
+# SELMAhO_LIhU = ""
 
-# LU = " "
+# selma'o LOhU (Section 19.9)
+# SELMAhO_LOhU = ""
 
-# NIhO = " "
+# selma'o LU (Section 19.9)
+# SELMAhO_LU = ""
 
-# SA = " "
+# selma'o NIhO (Section 19.3) - Separating paragraphs
+# SELMAhO_NIhO = "ni'o" _
 
-# SEI = " "
+# selma'o SA (Section 19.13)
+# SELMAhO_SA = ""
 
-# SEhU = " "
+# selma'o SEI (Section 19.12)
+# SELMAhO_SEI = ""
 
-# SI = " "
+# selma'o SEhU (Section 19.12)
+# SELMAhO_SEhU = ""
 
-# SU = " "
+# selma'o SI (Section 19.13)
+# SELMAhO_SI = ""
 
-# TO = " "
+# selma'o SU (Section 19.13)
+# SELMAhO_SU = ""
 
-# TOI = " "
+# selma'o TO (Section 19.12)
+# SELMAhO_TO = ""
 
-# TUhE = " "
+# selma'o TOI (Section 19.12)
+# SELMAhO_TOI = ""
 
-# TUhU = " "
+# selma'o TUhE (Section 19.2)
+# SELMAhO_TUhE = ""
 
-# Y = " "
+# selma'o TUhU (Section 19.2)
+# SELMAhO_TUhU = ""
 
-# ZO = " "
+# selma'o Y (Section 19.14)
+# SELMAhO_Y = ""
 
-# ZOI = " "
+# selma'o ZO (Section 19.10)
+# SELMAhO_ZO = ""
+
+# selma'o ZOI (Section 19.10)
+# SELMAhO_ZOI = ""
