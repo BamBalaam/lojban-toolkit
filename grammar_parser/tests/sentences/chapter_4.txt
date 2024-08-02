@@ -1,1 +1,5 @@
-# Chapter 3 focuses on morphology, thus has no sentences to be checked against the parser 
+# Chapter 4 focuses on morphology, thus has few sentences to be checked against the parser
+
+# Chapter 4.6
+# Example 4.39
+xy. zei kantu

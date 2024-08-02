@@ -145,7 +145,35 @@ le tavla cu kanro
 le tacla cu go'i
 
 # Chapter 2.16
+# Example 2.79
+.ie mi klama
+# Example 2.80
+.ei mi klama
+# Example 2.81
+mi klama le melbi .ui
+# Example 2.82
+mi klama .i do stali
+# Example 2.83
+mi klama .i ji'a do stali
+# Example 2.84
+mi klama .i ku'i do stali
+# Example 2.85
+pe'i do melbi
+# Example 2.86
+za'a do melbi
 
 # Chapter 2.17
+# Example 2.89
+la djan. cu klama le zarci
+# Example 2.90
 la djan. pu klama le zarci
+# Example 2.91
 la djan. ca klama le zarci
+# Example 2.92
+do vu vecnu zo'e
+# Example 2.93
+le pu bajra ku cu tavla
+# Example 2.94
+le vi bajra ku cu tavla
+# Example 2.95
+le vi tavla ku cu ba klama
