@@ -43,14 +43,15 @@ CMAVO_WITH_OR_WITHOUT_MODIFIERS = CMAVO_WITH_CU / CMAVO
 # grammatical families that exist. For an explanation of what each one of them do, search their
 # names further down.
 
-CMAVO = CMAVO_MA / CMAVO_MO / CMAVO_XU / SELMAhO_ZEI / SELMAhO_KOhA
+# CMAVO = CMAVO_MA / CMAVO_MO / CMAVO_XU / SELMAhO_ZEI / SELMAhO_KOhA
+CMAVO = SELMAhO_BO / SELMAhO_KOhA / SELMAhO_ZEI
 
 # Brivla are predicate words. They are the equivalent of nouns, verbs, adjectives and adverbs.
 # This grammar will not focus on defining all possible morphology rules to assemble 
 # (or even create brand new) words, as it is a tool to simplify learning.
 # There are 3 major sub-types, defined by the morphology of the word:
 # gismu: core brivla - represent basic concepts of the language
-# lujvo: brivla made of affixes
+# lujvo: brivla made of affixes, a compound word
 # fu'ivla: brivla which are borrowed verbs or loan words
 
 BRIVLA = GISMU / LUJVO / FUhIVLA
@@ -67,50 +68,43 @@ CMENE = (~r"[A-Za-z]+")+ "."? _
 
 # ----------------------------------------------------------------------------
 
-# Selma'o ZEI: join two words to create a lujvo (e.g. "xy. zei kantu" = X-ray)
-# selma'o ZEI (Section 4.6)
+# selma'o ZEI (Section 4.6): join two words to create a lujvo (e.g. "xy. zei kantu" = X-ray)
 ZEI = "zei" _
-SELMAhO_ZEI = BRIVLA ZEI BRIVLA
+SELMAhO_ZEI = (CMENE / GISMU / FUhIVLA) ZEI (CMENE / GISMU / FUhIVLA)
 
 ##############################################
-# Chapter 5 - The Structure Of Lojban selbri #
+# The Structure Of Lojban selbri - Chapter 5 #
 ##############################################
 
-# Tanru (Chapter 5.2)
-TANRU = (BRIVLA)+
+# Tanru (Chapter 5.2): two or more brivla placed together, like two nouns, adjective-noun or adverb-verb for example
+TANRU = BRIVLA{2,}
 
-# selma'o BE (Section 5.7)
-# SELMAhO_BE = ???
+# selma'o BO (Section 5.3, Section 15.6 and Section 18.17): scope grouping, i.e. differentiate between "big dog-catcher" and "big-dog catcher"
+BO = "bo" _
+SELMAhO_BO = (TANRU / BRIVLA) BO (TANRU / BRIVLA)
 
-# selma'o BEI (Section 5.7)
-# SELMAhO_BEI = ""
-
-# selma'o BEhO (Section 5.7)
-# SELMAhO_BEhO = ""
-
-# selma'o BO (Section 5.3)
-# SELMAhO_BO = ""
-
-# selma'o CO (Section 5.8)
-# SELMAhO_CO = ""
-
-# selma'o KE (Section 5.5)
+# selma'o KE and KEhE (Section 5.5): grouping parentheses - a much more explicit way of grouping words together
 # SELMAhO_KE = ""
 
 # selma'o KEhE (Section 5.5)
 # SELMAhO_KEhE = ""
 
-# selma'o ME (Section 5.10)
-# SELMAhO_ME = ""
+# selma'o BE, BEI and Beho (Section 5.7): linked sumti marker, separator and terminator
+# SELMAhO_BE = ""
+# SELMAhO_BEI = ""
+# SELMAhO_BEhO = ""
 
-# selma'o MEhU (Section 5.11)
-# SELMAhO_MEhU = ""
+# selma'o CO (Section 5.8): inversion of tanru
+# SELMAhO_CO = ""
 
-# selma'o MOI (Section 5.11)
+# selma'o MOI (Section 5.9 and Section 18.18): change a number to an ordinal or cardinal selbri
 # SELMAhO_MOI = ""
 
-# Varying order of sumti (aka "SE SELMA'O") (Chapter 2.7)
-# selma'o SE (Section 5.11)
+# selma'o ME and MEhu (Section 5.10 and Section 18.1): transform sumti into selbri
+# SELMAhO_ME = ""
+# SELMAhO_MEhU = ""
+
+# selma'o SE (Section 5.11, Section 9.4, and Section 2.7): Varying order of sumti
 SE = "se" _
 TE = "te" _
 VE = "ve" _
@@ -119,13 +113,13 @@ SELMAhO_SE = SE / TE / VE / XE
 BRIVLA_WITH_SE_FAMILY = SELMAhO_SE BRIVLA
 
 ################################
-# Chapter 6 - The Lojban sumti #
+# The Lojban sumti - Chapter 6 #
 ################################
 
-# selma'o COI (Section 6.11)
+# selma'o COI (Section 6.11 and Section 13.14)
 # SELMAhO_COI = ""
 
-# selma'o KU (Section 6.2)
+# selma'o KU (Section 6.2 and Section 10.1)
 # SELMAhO_KU = ""
 # Modifiers
 LO = "lo" _
@@ -178,7 +172,7 @@ ZOhE = "zo'e" _ # Unspecified value
 # selma'o DAhO (Section 7.13)
 # SELMAhO_DAhO = ""
 
-# selma'o GOhA (Section 7.6)
+# selma'o GOhA (Section 7.6 and Section 5.9)
 # SELMAhO_GOhA = ""
 
 # selma'o RAhO (Section 7.6)
@@ -298,11 +292,11 @@ BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
 # Chapter 11 - Abstraction #
 ############################
 
-# selma'o KEI (Section 11.1)
-# SELMAhO_KEI = ""
-
-# selma'o NU (Section 11.1)
+# selma'o NU (Section 11.1 and Section 5.9)
 # SELMAhO_NU = ""
+
+# selma'o KEI (Section 11.1 and Section 5.9)
+# SELMAhO_KEI = ""
 
 #######################################
 # Chapter 12 - Lujvo Place Structures #
@@ -312,6 +306,10 @@ BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
 # Chapter 13 - Attitudinal and Emotional Indicators #
 #####################################################
 
+# selma'o UI (Section 13.1)
+# SELMAhO_UI = ""
+CMAVO_XU = "xu" _
+
 # selma'o CAI (Section 13.4)
 # SELMAhO_CAI = ""
 
@@ -320,9 +318,6 @@ BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
 
 # selma'o DOhU (Section 13.14)
 # SELMAhO_DOhU = ""
-
-# selma'o UI (Section 13.1)
-# SELMAhO_UI = ""
 
 #########################################
 # Chapter 14 - Lojban Connective System #
@@ -334,9 +329,7 @@ BRIVLA_WITH_LOCATION = (VU / VI) BRIVLA
 # selma'o BIhI (Section 14.16)
 # SELMAhO_BIhI = ""
 
-CMAVO_XU = "xu" _
-
-# selma'o CEhE (Section 14.11)
+# selma'o CEhE (Section 14.11 and Section 16.7)
 # SELMAhO_CEhE = ""
 
 # selma'o GA (Section 14.5)
@@ -345,28 +338,32 @@ CMAVO_XU = "xu" _
 # selma'o GAhO (Section 14.16)
 # SELMAhO_GAhO = ""
 
-# selma'o GI (Section 14.5)
-# SELMAhO_GI = ""
+
 
 # selma'o GIhA (Section 14.3)
 # SELMAhO_GIhA = ""
 
-# selma'o GUhA (Section 14.3)
-# SELMAhO_GUhA = ""
-
-# selma'o JA (Section 14.3)
+# Logical connection within tanru
+# selma'o JA (Section 14.3 and Section 5.6)
 # SELMAhO_JA = ""
 
-# selma'o JOI (Section 14.14)
+# selma'o JOI (Section 14.14 and Section 5.6)
 # SELMAhO_JOI = ""
 
-# selma'o NA (Section 14.3)
+# selma'o GUhA (Section 14.3 and Section 5.6)
+# SELMAhO_GUhA = ""
+
+# selma'o GI (Section 14.5 and Section 5.6)
+# SELMAhO_GI = ""
+
+
+# selma'o NA (Section 14.3 and Section 15.7)
 # SELMAhO_NA = ""
 
-# selma'o NAI (Section 14.3)
+# selma'o NAI (Section 14.3 and Section 15.7)
 # SELMAhO_NAI = ""
 
-# selma'o NUhI (Section 14.11)
+# selma'o NUhI (Section 14.11 and Section 16.7)
 # SELMAhO_NUhI = ""
 
 # selma'o NUhU (Section 14.11)
@@ -389,7 +386,7 @@ CMAVO_XU = "xu" _
 # Chapter 16 - Logic #
 ######################
 
-# selma'o ZOhU (Section 16.2)
+# selma'o ZOhU (Section 16.2 and Section 19.4)
 # SELMAhO_ZOhU = ""
 
 #######################################
@@ -493,7 +490,7 @@ VE_O = "ve'o" _  # right parenthesis
 # selma'o LOhO (Section 18.17)
 # SELMAhO_LOhO = ""
 
-# selma'o MAI (Section 18.19)
+# selma'o MAI (Section 18.19 and Section 19.1)
 # SELMAhO_MAI = ""
 
 # selma'o MAhO (Section 18.6)
@@ -508,7 +505,7 @@ VE_O = "ve'o" _  # right parenthesis
 # selma'o NIhE (Section 18.18)
 # SELMAhO_NIhE = ""
 
-# selma'o NUhA (Section 18.19)
+# selma'o NUhA (Section 18.19 and Section 5.9)
 # SELMAhO_NUhA = ""
 
 # selma'o PEhO (Section 18.6)
