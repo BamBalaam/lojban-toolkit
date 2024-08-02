@@ -1,3 +1,6 @@
+import sys
+sys.path.append('.')
+
 from parsimonious.grammar import NodeVisitor
 
 from dictionary import Jbovlaste

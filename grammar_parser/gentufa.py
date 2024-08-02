@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+sys.path.append('.')
 
 from parsimonious.grammar import Grammar
 

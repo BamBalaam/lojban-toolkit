@@ -1,6 +1,10 @@
+import os
 import re
 import sys
+
 import xml.etree.ElementTree as ET
+
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 
 class Jbovlaste:
@@ -17,7 +21,7 @@ class Jbovlaste:
     def __init__(self, language="en"):
         self._dictionary = {}
         try:
-            tree = ET.parse(f"./dictionary/jbovlaste-{language}.xml")
+            tree = ET.parse(os.path.join(__location__, f"jbovlaste-{language}.xml"))
         except FileNotFoundError as exc:
             raise ValueError(f"Language '{language}' is not available.") from exc
         root = tree.getroot()
