@@ -27,4 +27,6 @@ def visit_BRIVLA_WITH_OR_WITHOUT_MODIFIERS(self, node, visited_children):
 
 def visit_GISMU(self, node, visited_children):
     literal = visited_children[0][0].text
-    return {literal: self.dictionary.get_word_struct(literal)}
+    gismu_struct = self.dictionary.get_word_struct(literal)
+    gismu_struct['sumti'] = self.dictionary.get_definition_arguments(literal)['args']
+    return {literal: gismu_struct}

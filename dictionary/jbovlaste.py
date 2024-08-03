@@ -84,12 +84,10 @@ class Jbovlaste:
         arguments = re.findall(r"\$.*?\$", definition)
         return {"definition": definition, "max_args": len(arguments), "args": arguments}
 
-    def get_definition_objects_list(self, word):
+    def get_definition_arguments(self, word):
         definition = self.get_word_struct(word)["definition"]
-        definitions_raw = definition.split(";")
-        definitions_final = []
-        for element in definitions_raw:
-            definitions_final.append(self.decompose_definition(element))
+        definitions_raw = definition.split(";")[0]
+        definitions_final = self.decompose_definition(definitions_raw)
         return definitions_final
 
 
