@@ -3,6 +3,7 @@ import re
 import sys
 sys.path.append('.')
 
+from parsimonious.exceptions import IncompleteParseError, ParseError
 from parsimonious.grammar import Grammar
 
 from dictionary import Jbovlaste
@@ -47,4 +48,7 @@ if __name__ == "__main__":
         print("Usage: gentufa.py [sentence to parse]")
         sys.exit(1)
     parser = Gentufa()
-    print(parser.get_parsed_sentence(sys.argv[1]))
+    try:
+        print(parser.get_parsed_sentence(sys.argv[1]))
+    except (IncompleteParseError, ParseError) as exc:
+        print("Error:", exc)
