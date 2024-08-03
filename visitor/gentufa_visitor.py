@@ -1,3 +1,4 @@
+import json
 import sys
 sys.path.append('.')
 
@@ -22,16 +23,29 @@ def add_functions_as_methods(functions):
 @add_functions_as_methods(visitor_functions.functions)
 class GentufaVisitor(NodeVisitor):
 
-    def __init__(self, text):
+    def __init__(self, parse_tree):
         self.dictionary = Jbovlaste()
-        self.ast = Gentufa().get_parsed_sentence(text)
-        self.output = {"sentence": text, "segments": []}
-        print(self.ast)
-        self.visit(self.ast)
+        self.output = {"sentence": parse_tree.full_text.replace(" EOL", ""), "segments": []}
+        self.visit(parse_tree)
 
     def get_output(self):
         return self.output
 
+    def get_json_output(self):
+        return json.dumps(self.output)
+
     def generic_visit(self, node, visited_children):
         """The generic visit method."""
         return visited_children or node
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: gentufa_visitor.py [sentence to parse]")
+        sys.exit(1)
+    parse_tree = Gentufa().get_parsed_sentence(sys.argv[1])
+    visitor = GentufaVisitor(parse_tree)
+    try:
+        print(visitor.get_json_output())
+    except:
+        print("Error:")
