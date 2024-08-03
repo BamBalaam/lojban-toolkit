@@ -10,8 +10,7 @@ __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file
 class Jbovlaste:
     """
     Creates an object which allows to fetch Lojban words.
-    Gathers all words by parsing an XML export of the official
-    La Jbovlaste ("dictionary" in Lojban).
+    Collects words by parsing an XML export of the official La Jbovlaste ("dictionary" in Lojban).
     Words include:
         - a type
         - a definition

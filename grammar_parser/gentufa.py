@@ -13,8 +13,7 @@ __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file
 
 class Gentufa:
     """
-    TODO: Add docstring
-    TODO: Add error handling
+    Creates an object which allows to parse Lojban sentences.
     """
 
     def __init__(self):
