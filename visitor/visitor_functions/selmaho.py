@@ -1,6 +1,5 @@
 def visit_BO(self, node, visited_children):
-    literal = visited_children[0][0].text
-    return {literal: {"definition": "scope grouping", "type": "cmavo / selma'o BO"}}
+    return {"bo": {"definition": "scope grouping", "type": "cmavo / selma'o BO"}}
 
 def visit_SELMAhO_SE(self, node, visited_children):
     definition = {
@@ -64,11 +63,16 @@ def visit_LUhU(self, node, visited_children):
         }
     }
 
-def visit_COI(self, node, visited_children):
+def visit_SELMAhO_COI(self, node, visited_children):
+    definition = {
+        "coi": "greetings",
+        "co'o": "goodbye",
+    }
+    literal = visited_children[0][0].text
     return {
-        "coi": {
-            "definition": "greeting",
-            "type": "cmavo / selma'o COI",
+        literal: {
+            "definition": definition[literal],
+            "type": "cmavo / selma'o COI / vocative words",
         }
     }
 
@@ -269,5 +273,25 @@ def visit_SELMAhO_ZI(self, node, visited_children):
         literal: {
             "definition": definition[literal],
             "type": "cmavo / selma'o ZI / temporal tense",
+        }
+    }
+
+def visit_SELMAhO_UI(self, node, visited_children):
+    definition = {
+        "xu": "true/false question",
+        "ku'i": "however/but/in contrast",
+        "ji'a": "additionally",
+        "si'a": "similarly",
+        "mi'u": "ditto",
+        "po'o": "the only relevant case",
+        "pe'i": "it is my opinion",
+        "za'a": "I observe that",
+        "ru'a": "I postulate the relationship",
+    }
+    literal = visited_children[0][0].text
+    return {
+        literal: {
+            "definition": definition[literal],
+            "type": "cmavo / selma'o UI / discursive+evidentials",
         }
     }

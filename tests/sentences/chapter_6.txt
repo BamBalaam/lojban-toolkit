@@ -1,0 +1,57 @@
+### Chapter 6.1 ###
+# Example 6.1
+mi klama le zarci
+# Example 6.2
+e'osai ko sarji la lojban
+# Example 6.3
+mi cusku lu e'osai li'u le tcidu
+# Example 6.4
+ti mitre li ci
+
+### Chapter 6.2 ###
+# Example 6.5
+le zarci
+# Example 6.6
+le zarci cu barda
+# Example 6.7
+le nanmu cu ninmu
+# Example 6.8
+lo zarci
+# Example 6.9
+lo nanmu cu ninmu
+# Example 6.10
+la cribe pu finti le lisri
+# Example 6.11
+la stace pu citka lo cirla
+# Example 6.12
+le cribe pu finti le lisri
+# Example 6.13
+lo cribe pu finti le lisri
+# Example 6.14
+le remna pu finti le lisri
+# Example 6.15
+lo remna pu finti le lisri
+
+### Chapter 6.3 ###
+
+### Chapter 6.4 ###
+
+### Chapter 6.5 ###
+
+### Chapter 6.6 ###
+
+### Chapter 6.7 ###
+
+### Chapter 6.8 ###
+
+### Chapter 6.9 ###
+
+### Chapter 6.10 ###
+
+### Chapter 6.11 ###
+
+### Chapter 6.12 ###
+
+### Chapter 6.13 ###
+
+### Chapter 6.14 ###

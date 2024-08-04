@@ -51,7 +51,9 @@ CMAVO = (
     SELMAhO_LE / SELMAhO_LA / SELMAhO_KU / SELMAhO_LAhE / SELMAhO_LUhU / SELMAhO_COI /
     SELMAhO_KOhA / SELMAhO_GOhA /
     SELMAhO_CU /
-    SELMAhO_VA / SELMAhO_FAhA / SELMAhO_PU / SELMAhO_ZI
+    SELMAhO_VA / SELMAhO_FAhA / SELMAhO_PU / SELMAhO_ZI /
+    SELMAhO_UI /
+    SELMAhO_BAhE
 )
 
 # Brivla are predicate words. They are the equivalent of nouns, verbs, adjectives and adverbs.
@@ -160,8 +162,9 @@ SELMAhO_LUhU = LUhU
 LUhU = "lu'u" _
 
 # Greeting - selma'o COI (Section 6.11 and Section 13.14)
-SELMAhO_COI = COI
-COI = "coi" _
+SELMAhO_COI = ( COI / COhO )
+COI = "coi" '.'{0,1} _   # Greeting
+COhO = "co'o" '.'{0,1} _ # Goodbye
 
 ###########################
 # Pro-sumti and Pro-bridi #
@@ -375,9 +378,17 @@ ZU = "zu" _ # long time distance
 # Chapter 13 - Attitudinal and Emotional Indicators #
 #####################################################
 
-# selma'o UI (Section 13.1)
-# SELMAhO_UI = ""
-CMAVO_XU = "xu" _
+# Discursives and Evidentials - selma'o UI (Section 13.1)
+SELMAhO_UI = (XU / KUhI / JIhA / SIhA / MIhU / POhO / PEhI / ZAhA / RUhA)
+XU = "xu" _     # true/false question
+KUhI = "ku'i" _ # however/but/in contrast
+JIhA = "ji'a" _ # additionally
+SIhA = "si'a" _ # similarly
+MIhU = "mi'u" _ # ditto
+POhO = "po'o" _ # the only relevant case
+PEhI = "pe'i" _ # it is my opinion
+ZAhA = "za'a" _ # I observe that
+RUhA = "ru'a" _ # I postulate the relationship
 
 # selma'o CAI (Section 13.4)
 # SELMAhO_CAI = ""
