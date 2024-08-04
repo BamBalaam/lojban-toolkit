@@ -83,7 +83,7 @@ CMENE = (~r"\.?[A-Za-z]+\.?") _
 
 # selma'o ZEI (Section 4.6): join two words to create a lujvo (e.g. "xy. zei kantu" = X-ray)
 ZEI = "zei" _
-SELMAhO_ZEI = (CMENE / GISMU / FUhIVLA) ZEI (CMENE / GISMU / FUhIVLA)
+SELMAhO_ZEI = (GISMU / FUhIVLA / CMENE) ZEI (GISMU / FUhIVLA / CMENE)
 
 ##################################
 # The Structure Of Lojban selbri #
