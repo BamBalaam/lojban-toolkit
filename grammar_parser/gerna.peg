@@ -47,12 +47,13 @@ TANRU_OR_BRIVLA = TANRU / BRIVLA
 
 CMAVO = (
     SELMAhO_ZEI /
-    SELMAhO_BO / SELMAhO_SE /
+    SELMAhO_BO / SELMAhO_KE / SELMAhO_KEhE / SELMAhO_SE /
     SELMAhO_LE / SELMAhO_LA / SELMAhO_KU / SELMAhO_LAhE / SELMAhO_LUhU / SELMAhO_COI /
     SELMAhO_KOhA / SELMAhO_GOhA /
-    SELMAhO_CU /
+    SELMAhO_CU / SELMAhO_FA /
     SELMAhO_VA / SELMAhO_FAhA / SELMAhO_PU / SELMAhO_ZI /
     SELMAhO_UI /
+    SELMAhO_BY /
     SELMAhO_BAhE
 )
 
@@ -96,10 +97,10 @@ SELMAhO_BO = BO
 BO = "bo" _
 
 # selma'o KE and KEhE (Section 5.5): grouping parentheses - a much more explicit way of grouping words together
-# SELMAhO_KE = ""
-
-# selma'o KEhE (Section 5.5)
-# SELMAhO_KEhE = ""
+SELMAhO_KE = KE
+KE = "ke" _      # start grouping
+SELMAhO_KEhE = KEhE
+KEhE = "ke'e" _  # end grouping
 
 # selma'o BE, BEI and BEhO (Section 5.7): linked sumti marker, separator and terminator
 # SELMAhO_BE = ""
@@ -134,16 +135,14 @@ SELMAhO_SE = SE / TE / VE / XE
 # - quotations
 # - numbers
 
-# Descriptions - selma'o LE (Section 6.2)
+# selma'o LE and LA (Section 6.2): Descriptions
 SELMAhO_LE = LE / LO
 LE = "le" _ # the, the one(s) described as
 LO = "lo" _ # some, some of those which really are
-
-# Descriptions - selma'o LA (Section 6.2)
 SELMAhO_LA = LA
 LA = "la" _ # the ones named
 
-# Elidable terminator - selma'o KU (Section 6.2 and Section 10.1)
+# selma'o KU (Section 6.2 and Section 10.1): Elidable terminator
 SELMAhO_KU = KU
 KU = "ku" _ # elidable terminator
 
@@ -176,10 +175,10 @@ COhO = "co'o" '.'{0,1} _ # Goodbye
 # Pro-bridi are pronouns which serve as selbri or full bridi.
 # Let's explore a few families of these.
 
-# Pro-sumti - selma'o KOhA (Section 7.1)
+# selma'o KOhA (Section 7.1): Pro-sumti
 SELMAhO_KOhA = KOhA_MI_SERIES / KOhA_TI_SERIES / KOhA_DIhU_SERIES / KOhA_RI_SERIES / KOhA_ZOhE_SERIES / KOhA_OTHER
 
-# Personal pronouns - selma'o KOhA: mi-series (Section 7.2)
+# selma'o KOhA: mi-series (Section 7.2): Personal pronouns
 KOhA_MI_SERIES = (MI / MIhO / MIhA / MAhA / DO / DOhO / KO)
 MI = "mi" _     # I/me
 MIhO = "mi'o" _ # You and I
@@ -189,13 +188,13 @@ DO = "do" _     # You
 DOhO = "do'o" _ # You and others
 KO = "ko" _     # You - imperative
 
-# Demonstrative pronouns - selma'o KOhA: ti-series (Section 7.3)
+# selma'o KOhA: ti-series (Section 7.3): Demonstrative pronouns
 KOhA_TI_SERIES = (TI / TA / TU)
 TI = "ti" _     # This, these
 TA = "ta" _     # That, those
 TU = "tu" _     # That far away, those far away
 
-# Utterance pronouns - selma'o KOhA: di'u-series (Section 7.4)
+# selma'o KOhA: di'u-series (Section 7.4): Utterance pronouns
 KOhA_DIhU_SERIES = (DIhU / DEhU / DAhU / DIhE / DEhE / DAhE / DEI / DOhI)
 DIhU = "di'u" _ # The previous utterance
 DEhU = "de'u" _ # An earlier utterance
@@ -206,13 +205,13 @@ DAhE = "da'e" _ # A much later utterance
 DEI = "dei" _   # This very utterance
 DOhI = "do'i" _ # Some utterance
 
-# Anaphoric pronouns - selma'o KOhA: ri-series (Section 7.6)
+# selma'o KOhA: ri-series (Section 7.6): Anaphoric pronouns
 KOhA_RI_SERIES = (RI / RA / RU)
 RI = "ri" _ # Repeats last sumti
 RA = "ra" _ # Repeats previous sumti
 RU = "ru" _ # Repeats long-ago sumti
 
-# Indefinite pronouns - selma'o KOhA: zo'e-series (Section 7.7)
+# selma'o KOhA: zo'e-series (Section 7.7): Indefinite pronouns
 KOhA_ZOhE_SERIES = (ZOhE / ZUhI / ZIhO)
 ZOhE = "zo'e" _ # Obvious value
 ZUhI = "zu'i" _ # Typical value
@@ -253,56 +252,27 @@ MO = "mo" _
 # selma'o DAhO (Section 7.13)
 # SELMAhO_DAhO = ""
 
-################################
-# Relative Clauses - Chapter 8 #
-################################
+##########
+# Modals #
+##########
 
-# selma'o GEhU (Section 8.3)
-# SELMAhO_GEhU = ""
-
-# selma'o GOI (Section 8.3)
-# SELMAhO_GOI = ""
-
-# selma'o KUhO (Section 8.1)
-# SELMAhO_KUhO = ""
-
-# selma'o NOI (Section 8.1)
-# SELMAhO_NOI = ""
-
-# selma'o VUhO (Section 8.8)
-# SELMAhO_VUhO = ""
-
-# selma'o ZIhE (Section 8.4)
-# SELMAhO_ZIhE = ""
-
-######################
-# Modals - Chapter 9 #
-######################
-
-# selma'o CU Separator (Section 9.2)
+# selma'o CU (Section 9.2): Separator
 SELMAhO_CU = CU
 CU = "cu" _
 
-# selma'o FA (Section 9.3)
-# SELMAhO_FA = "fa" / "fe" / "fi" / "fo" / "fu"
+# selma'o FA (Section 9.3): Tagging sumti explicitly
+SELMAhO_FA = FA / FE / FI / FO / FU
+FA = "fa" _  # tags x1 place
+FE = "fe" _  # tags x1 place
+FI = "fi" _  # tags x1 place
+FO = "fo" _  # tags x1 place
+FU = "fu" _  # tags x1 place
 
-# selma'o FEhU (Section 9.5)
-# SELMAhO_FEhU = ""
+###########################
+# Space/Time Tense System #
+###########################
 
-# selma'o FIhO (Section 9.5)
-# SELMAhO_FIhO = ""
-
-# selma'o BAI (Section 9.6)
-# SELMAhO_BAI = ""
-
-# selma'o JAI (Section 9.12)
-# SELMAhO_JAI = ""
-
-########################################
-# Space/Time Tense System - Chapter 10 #
-########################################
-
-# Spacial Tenses - selma'o VA and FAhA (Section 10.2)
+# selma'o VA and FAhA (Section 10.2): Spacial Tenses
 SELMAhO_VA = (VI / VA / VU)
 VI = "vi" _ # short distance
 VA = "va" _ # medium distance
@@ -316,7 +286,7 @@ NIhA = "ni'a" _ # down
 CAhU = "ca'u" _ # front
 NEhI = "ne'i" _ # within
 
-# Temporal Tenses - selma'o PU and ZI (Section 10.4)
+# selma'o PU and ZI (Section 10.4): Temporal Tenses
 SELMAhO_PU = (PU / CA / BA)
 PU = "pu" _ # past
 CA = "ca" _ # present
@@ -327,58 +297,11 @@ ZI = "zi" _ # short time distance
 ZA = "za" _ # medium time distance
 ZU = "zu" _ # long time distance
 
-# selma'o CAhA (Section 10.19)
-# SELMAhO_CAhA = ""
+########################################
+# Attitudinal and Emotional Indicators #
+########################################
 
-# selma'o CUhE (Section 10.24)
-# SELMAhO_CUhE = ""
-
-# selma'o FEhE (Section 10.11)
-# SELMAhO_FEhE = ""
-
-# selma'o KI (Section 10.13)
-# SELMAhO_KI = ""
-
-# selma'o MOhI (Section 10.8)
-# SELMAhO_MOhI = ""
-
-# selma'o ROI (Section 10.9)
-# SELMAhO_ROI = ""
-
-# selma'o TAhE (Section 10.9)
-# SELMAhO_TAhE = ""
-
-# selma'o VEhA (Section 10.5)
-# SELMAhO_VEhA = ""
-
-# selma'o VIhA (Section 10.7)
-# SELMAhO_VIhA = ""
-
-# selma'o ZAhO (Section 10.10)
-# SELMAhO_ZAhO = ""
-
-# selma'o ZEhA (Section 10.5)
-# SELMAhO_ZEhA = ""
-
-############################
-# Chapter 11 - Abstraction #
-############################
-
-# selma'o NU (Section 11.1 and Section 5.9)
-# SELMAhO_NU = ""
-
-# selma'o KEI (Section 11.1 and Section 5.9)
-# SELMAhO_KEI = ""
-
-#######################################
-# Chapter 12 - Lujvo Place Structures #
-#######################################
-
-#####################################################
-# Chapter 13 - Attitudinal and Emotional Indicators #
-#####################################################
-
-# Discursives and Evidentials - selma'o UI (Section 13.1)
+# selma'o UI (Section 13.1): Discursives and Evidentials
 SELMAhO_UI = (XU / KUhI / JIhA / SIhA / MIhU / POhO / PEhI / ZAhA / RUhA)
 XU = "xu" _     # true/false question
 KUhI = "ku'i" _ # however/but/in contrast
@@ -390,85 +313,9 @@ PEhI = "pe'i" _ # it is my opinion
 ZAhA = "za'a" _ # I observe that
 RUhA = "ru'a" _ # I postulate the relationship
 
-# selma'o CAI (Section 13.4)
-# SELMAhO_CAI = ""
-
-# selma'o DOI (Section 13.14)
-# SELMAhO_DOI = ""
-
-# selma'o DOhU (Section 13.14)
-# SELMAhO_DOhU = ""
-
-#########################################
-# Chapter 14 - Lojban Connective System #
-#########################################
-
-# selma'o A (Section 14.6)
-# SELMAhO_A = ""
-
-# selma'o BIhI (Section 14.16)
-# SELMAhO_BIhI = ""
-
-# selma'o CEhE (Section 14.11 and Section 16.7)
-# SELMAhO_CEhE = ""
-
-# selma'o GA (Section 14.5)
-# SELMAhO_GA = ""
-
-# selma'o GAhO (Section 14.16)
-# SELMAhO_GAhO = ""
-
-# selma'o GIhA (Section 14.3)
-# SELMAhO_GIhA = ""
-
-# Logical connection within tanru
-# selma'o JA (Section 14.3 and Section 5.6)
-# SELMAhO_JA = ""
-
-# selma'o JOI (Section 14.14 and Section 5.6)
-# SELMAhO_JOI = ""
-
-# selma'o GUhA (Section 14.3 and Section 5.6)
-# SELMAhO_GUhA = ""
-
-# selma'o GI (Section 14.5 and Section 5.6)
-# SELMAhO_GI = ""
-
-# selma'o NA (Section 14.3 and Section 15.7)
-# SELMAhO_NA = ""
-
-# selma'o NAI (Section 14.3 and Section 15.7)
-# SELMAhO_NAI = ""
-
-# selma'o NUhI (Section 14.11 and Section 16.7)
-# SELMAhO_NUhI = ""
-
-# selma'o NUhU (Section 14.11)
-# SELMAhO_NUhU = ""
-
-# selma'o PEhE (Section 14.11)
-# SELMAhO_PEhE = ""
-
-# selma'o VAU (Section 14.9)
-# SELMAhO_VAU = ""
-
-#########################
-# Chapter 15 - Negation #
-#########################
-
-# selma'o NAhE (Section 15.4)
-# SELMAhO_NAhE = ""
-
-######################
-# Chapter 16 - Logic #
-######################
-
-# selma'o ZOhU (Section 16.2 and Section 19.4)
-# SELMAhO_ZOhU = ""
-
-#######################################
-# Lojban Latteral System - Chapter 17 #
-#######################################
+##########################
+# Lojban Latteral System #
+##########################
 
 # Latterals are, quite simply, letters of the lojban alphabet.
 # The word was invented as an analogy with "numeral" for numbers.
@@ -477,20 +324,35 @@ RUhA = "ru'a" _ # I postulate the relationship
 # Lerfu are used to spell words, form acronyms and abbreviations,
 # as mathematical symbols, or as pro-sumti.
 
-# selma'o BY (Section 17.2)
-# SELMAhO_BY = ""
-
-# selma'o BU (Section 17.4)
-# SELMAhO_BU = ""
-
-# selma'o FOI (Section 17.6)
-# SELMAhO_FOI = ""
-
-# selma'o LAU (Section 17.14)
-# SELMAhO_LAU = ""
-
-# selma'o TEI (Section 17.6)
-# SELMAhO_TEI = ""
+# selma'o BY (Section 17.2): Latterals
+SELMAhO_BY = (
+    SINGLE_QUOTE / A / B / C / D / E / F / G / I / J / K /
+    L / M / N / O / P / R / S / T / U / V / X / Y / Z
+)
+SINGLE_QUOTE = ".y'y" _ # Latteral for a single quote
+A = ".abu" _ # Latteral for the letter A 
+B = "by." _  # Latteral for the letter B 
+C = "cy." _  # Latteral for the letter C 
+D = "dy." _  # Latteral for the letter D 
+E = ".ebu" _ # Latteral for the letter E 
+F = "fy." _  # Latteral for the letter F 
+G = "gy." _  # Latteral for the letter G 
+I = ".ibu" _ # Latteral for the letter I 
+J = "jy." _  # Latteral for the letter J 
+K = "ky." _  # Latteral for the letter K 
+L = "ly." _  # Latteral for the letter L 
+M = "my." _  # Latteral for the letter M 
+N = "ny." _  # Latteral for the letter N 
+O = ".obu" _ # Latteral for the letter O 
+P = "py." _  # Latteral for the letter P 
+R = "ry." _  # Latteral for the letter R 
+S = "sy." _  # Latteral for the letter S 
+T = "ty." _  # Latteral for the letter T 
+U = ".ubu" _ # Latteral for the letter U 
+V = "vy." _  # Latteral for the letter V 
+X = "xy." _  # Latteral for the letter X 
+Y = "ybu." _ # Latteral for the letter Y 
+Z = "zy." _  # Latteral for the letter Z 
 
 ##########################################
 # Chapter 19 - Structure of Lojban Texts #
@@ -501,71 +363,61 @@ SELMAhO_I = ".i" _
 
 # Contrastive Emphasis: selma'o BAhE (Section 19.11)
 SELMAhO_BAhE = BAhE / ZAhE
-BAhE = "ba'e" _
-ZAhE = "za'e" _
+BAhE = "ba'e" _ # emphasize next word
+ZAhE = "za'e" _ # next word is nonce
 
-# selma'o FAhO (Section 19.15)
-# SELMAhO_FAhO = ""
+###########################################
+# selma'o not yet covered by this grammar #
+###########################################
 
-# selma'o FUhE (Section 19.8)
-# SELMAhO_FUhE = ""
-
-# selma'o FUhO (Section 19.8)
-# SELMAhO_FUhO = ""
-
-# selma'o LEhU (Section 19.9)
-# SELMAhO_LEhU = ""
-
-# selma'o LIhU (Section 19.9)
-# SELMAhO_LIhU = ""
-
-# selma'o LOhU (Section 19.9)
-# SELMAhO_LOhU = ""
-
-# selma'o LU (Section 19.9)
-# SELMAhO_LU = ""
-
-# selma'o NIhO (Section 19.3) - Separating paragraphs
-# SELMAhO_NIhO = "ni'o" _
-
-# selma'o SA (Section 19.13)
-# SELMAhO_SA = ""
-
-# selma'o SEI (Section 19.12)
-# SELMAhO_SEI = ""
-
-# selma'o SEhU (Section 19.12)
-# SELMAhO_SEhU = ""
-
-# selma'o SI (Section 19.13)
-# SELMAhO_SI = ""
-
-# selma'o SU (Section 19.13)
-# SELMAhO_SU = ""
-
-# selma'o TO (Section 19.12)
-# SELMAhO_TO = ""
-
-# selma'o TOI (Section 19.12)
-# SELMAhO_TOI = ""
-
-# selma'o TUhE (Section 19.2)
-# SELMAhO_TUhE = ""
-
-# selma'o TUhU (Section 19.2)
-# SELMAhO_TUhU = ""
-
-# selma'o Y (Section 19.14)
-# SELMAhO_Y = ""
-
-# selma'o ZO (Section 19.10)
-# SELMAhO_ZO = ""
-
-###################################
-# Missing selma'o in this grammar #
-###################################
-
-# Missing selma'o in this grammar:
+# - selma'o GEhU (Section 8.3)
+# - selma'o GOI (Section 8.3)
+# - selma'o KUhO (Section 8.1)
+# - selma'o NOI (Section 8.1)
+# - selma'o VUhO (Section 8.8)
+# - selma'o ZIhE (Section 8.4)
+# - selma'o FEhU (Section 9.5)
+# - selma'o FIhO (Section 9.5)
+# - selma'o BAI (Section 9.6)
+# - selma'o JAI (Section 9.12)
+# - selma'o CAhA (Section 10.19)
+# - selma'o CUhE (Section 10.24)
+# - selma'o FEhE (Section 10.11)
+# - selma'o KI (Section 10.13)
+# - selma'o MOhI (Section 10.8)
+# - selma'o ROI (Section 10.9)
+# - selma'o TAhE (Section 10.9)
+# - selma'o VEhA (Section 10.5)
+# - selma'o VIhA (Section 10.7)
+# - selma'o ZAhO (Section 10.10)
+# - selma'o ZEhA (Section 10.5)
+# - selma'o NU (Section 11.1 and Section 5.9)
+# - selma'o KEI (Section 11.1 and Section 5.9)
+# - selma'o A (Section 14.6)
+# - selma'o BIhI (Section 14.16)
+# - selma'o CEhE (Section 14.11 and Section 16.7)
+# - selma'o GA (Section 14.5)
+# - selma'o GAhO (Section 14.16)
+# - selma'o GIhA (Section 14.3)
+# - selma'o JA (Section 14.3 and Section 5.6)
+# - selma'o JOI (Section 14.14 and Section 5.6)
+# - selma'o GUhA (Section 14.3 and Section 5.6)
+# - selma'o GI (Section 14.5 and Section 5.6)
+# - selma'o NA (Section 14.3 and Section 15.7)
+# - selma'o NAI (Section 14.3 and Section 15.7)
+# - selma'o NUhI (Section 14.11 and Section 16.7)
+# - selma'o NUhU (Section 14.11)
+# - selma'o PEhE (Section 14.11)
+# - selma'o VAU (Section 14.9)
+# - selma'o NAhE (Section 15.4)
+# - selma'o ZOhU (Section 16.2 and Section 19.4)
+# - selma'o BU (Section 17.4)
+# - selma'o FOI (Section 17.6)
+# - selma'o LAU (Section 17.14)
+# - selma'o TEI (Section 17.6)
+# - selma'o CAI (Section 13.4)
+# - selma'o DOI (Section 13.14)
+# - selma'o DOhU (Section 13.14)
 # - selma'o BIhE (Section 18.5)
 # - selma'o BOI (Section 18.6)
 # - selma'o FUhA (Section 18.16)
@@ -587,3 +439,22 @@ ZAhE = "za'e" _
 # - selma'o VUhU (Section 18.5)
 # - selma'o XI (Section 18.13)
 # - selma'o ZOI (Section 19.10)
+# - selma'o FAhO (Section 19.15)
+# - selma'o FUhE (Section 19.8)
+# - selma'o FUhO (Section 19.8)
+# - selma'o LEhU (Section 19.9)
+# - selma'o LIhU (Section 19.9)
+# - selma'o LOhU (Section 19.9)
+# - selma'o LU (Section 19.9)
+# - selma'o NIhO (Section 19.3)
+# - selma'o SA (Section 19.13)
+# - selma'o SEI (Section 19.12)
+# - selma'o SEhU (Section 19.12)
+# - selma'o SI (Section 19.13)
+# - selma'o SU (Section 19.13)
+# - selma'o TO (Section 19.12)
+# - selma'o TOI (Section 19.12)
+# - selma'o TUhE (Section 19.2)
+# - selma'o TUhU (Section 19.2)
+# - selma'o Y (Section 19.14)
+# - selma'o ZO (Section 19.10)

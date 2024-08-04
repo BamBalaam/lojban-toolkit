@@ -1,10 +1,6 @@
 ### Chapter 6.1 ###
 # Example 6.1
 mi klama le zarci
-# Example 6.2
-e'osai ko sarji la lojban
-# Example 6.3
-mi cusku lu e'osai li'u le tcidu
 # Example 6.4
 ti mitre li ci
 

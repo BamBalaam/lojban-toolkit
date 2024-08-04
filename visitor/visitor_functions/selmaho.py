@@ -295,3 +295,19 @@ def visit_SELMAhO_UI(self, node, visited_children):
             "type": "cmavo / selma'o UI / discursive+evidentials",
         }
     }
+
+def visit_KE(self, node, visited_children):
+    return {
+        "ke": {
+            "definition": "start grouping",
+            "type": "cmavo / selma'o KE",
+        }
+    }
+
+def visit_KEhE(self, node, visited_children):
+    return {
+        "ke'e": {
+            "definition": "end grouping",
+            "type": "cmavo / selma'o KehE",
+        }
+    }
