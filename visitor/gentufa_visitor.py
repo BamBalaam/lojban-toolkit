@@ -51,7 +51,7 @@ if __name__ == "__main__":
     parse_tree = Gentufa().get_parsed_text(sys.argv[1])
     try:
         visitor = GentufaVisitor(parse_tree)
-        print(visitor.get_output())
+        # print(visitor.get_output())
         print(visitor.get_json_output())
     except Exception as exc:
         print("Error: ", exc)

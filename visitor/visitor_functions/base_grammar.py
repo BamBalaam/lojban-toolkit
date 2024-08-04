@@ -49,5 +49,5 @@ def visit_FUhIVLA(self, node, visited_children):
     return {literal: fuhivla_struct}
 
 def visit_CMENE(self, node, visited_children):
-    literal = visited_children[0][0].text
+    literal = visited_children[0].text
     return {literal: {"type": "cmene", "definition": "name of a person or thing"}}

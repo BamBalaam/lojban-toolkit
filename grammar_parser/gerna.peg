@@ -70,7 +70,7 @@ LUJVO = {{lujvo}}
 FUhIVLA = {{fu'ivla}}
 
 # Cmene are words used as a name (things or people)
-CMENE = (~r"[A-Za-z]+")+ "."? _
+CMENE = (~r"\.?[A-Za-z]+\.?") _
 
 # Cmevla, a subset of cmene, are words sometimes used to create names.
 # Commented out of the grammar as it is an advanced subject which is not present in the reference book.
