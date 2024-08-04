@@ -354,9 +354,9 @@ X = "xy." _  # Latteral for the letter X
 Y = "ybu." _ # Latteral for the letter Y 
 Z = "zy." _  # Latteral for the letter Z 
 
-##########################################
-# Chapter 19 - Structure of Lojban Texts #
-##########################################
+#############################
+# Structure of Lojban Texts #
+#############################
 
 # Separating sentences - selma'o I (Section 19.2)
 SELMAhO_I = ".i" _
