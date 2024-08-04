@@ -1,7 +1,8 @@
 import os
 import re
 import sys
-sys.path.append('.')
+
+sys.path.append(".")
 
 from parsimonious.exceptions import IncompleteParseError, ParseError
 from parsimonious.grammar import Grammar
@@ -35,11 +36,9 @@ class Gentufa:
             )
         self.grammar = Grammar(grammar_text)
 
-    def get_parsed_sentence(self, sentence):
-        sentence = (
-            sentence + " EOL"
-        )  # Adding end of line indicator to avoid parsing issues
-        return self.grammar.parse(sentence)
+    def get_parsed_text(self, text):
+        text = text + " EOL"  # Adding end of line indicator to avoid parsing issues
+        return self.grammar.parse(text)
 
 
 if __name__ == "__main__":
@@ -48,6 +47,6 @@ if __name__ == "__main__":
         sys.exit(1)
     parser = Gentufa()
     try:
-        print(parser.get_parsed_sentence(sys.argv[1]))
+        print(parser.get_parsed_text(sys.argv[1]))
     except (IncompleteParseError, ParseError) as exc:
         print("Error:", exc)

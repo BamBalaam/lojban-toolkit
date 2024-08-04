@@ -1,4 +1,4 @@
-# Chapter 2.5
+### Chapter 2.5 ###
 # Example 2.11
 mi tavla do zo'e zo'e
 # Example 2.12
@@ -10,7 +10,7 @@ mi tavla do
 # Example 2.15
 do tavla mi ta
 
-# Chapter 2.6
+### Chapter 2.6 ###
 # Example 2.16
 mi cu vecnu ti ta zo'e
 # Example 2.17
@@ -22,7 +22,7 @@ ta cu melbi
 # Example 2.20
 cu melbi
 
-# Chapter 2.7
+### Chapter 2.7 ###
 # Example 2.21
 mi tavla do ti
 # Example 2.22
@@ -32,7 +32,7 @@ mi tavla do ti
 # Example 2.24
 ti te tavla do mi
 
-# Chapter 2.9
+### Chapter 2.9 ###
 # Example 2.25
 sutra tavla
 # Example 2.27
@@ -56,7 +56,7 @@ la tam cu tavla melbi la meris
 # Example 2.37
 la tam cu se tavla melbi la meris
 
-# Chapter 2.10
+### Chapter 2.10 ###
 # Example 2.38
 mi tavla do le tavla ku
 # Example 2.40
@@ -72,7 +72,7 @@ le sutra cu se tavla
 # Example 2.45
 mi cu tavla le vecnu ku le blari'o ku
 
-# Chapter 2.11
+### Chapter 2.11 ###
 # Example 2.46
 mi cu klama ti zo'e zo'e ta
 # Example 2.47
@@ -80,47 +80,43 @@ ta cu blari'o
 # Example 2.48
 ti cu djarspageti
 # Example 2.49
-# skipping this sentence as go'i is covered mostly in Chapter 7
-# ta cu go'i
+ta cu go'i
 
-# Chapter 2.12
+### Chapter 2.12 ###
 # Example 2.50
 le gerku ku cu melbi
 # Example 2.51
 ti cu pluka mi
 # Example 2.52
-# skipping this sentence as di'u is covered mostly in Chapter 7
-# di'u cu pluka mi
+di'u cu pluka mi
 # Example 2.53
-# skipping this sentence as di'u is covered mostly in Chapter 7
-# la'e di'u cu pluka mi
+la'e di'u cu pluka mi
 
-# Chapter 2.13
+### Chapter 2.13 ###
 # Example 2.54
-# skipping this sentence as possession is covered mostly in Chapter 8
-# le mi gerku cu sutra
+le mi gerku cu sutra
 
-# Chapter 2.14
+### Chapter 2.14 ###
 # Example 2.55
-# doi djan
+doi djan
 # Example 2.56
-# coi. djan
+coi. djan
 # Example 2.57
-# co'o. djan
+co'o. djan
 # Example 2.58
-# do tavla
+do tavla
 # Example 2.59
-# ko tavla
+ko tavla
 # Example 2.60
-# ko sutra
+ko sutra
 # Example 2.61
-# mi tavla ko
+mi tavla ko
 # Example 2.62
-# ko kurji ko
+ko kurji ko
 # Example 2.63
-# ko ko kurji
+ko ko kurji
 
-# Chapter 2.15
+### Chapter 2.15 ###
 # Example 2.64
 ma tavla do mi
 # Example 2.66
@@ -144,7 +140,7 @@ le tavla cu kanro
 # Example 2.78
 le tacla cu go'i
 
-# Chapter 2.16
+### Chapter 2.16 ###
 # Example 2.79
 .ie mi klama
 # Example 2.80
@@ -162,7 +158,7 @@ pe'i do melbi
 # Example 2.86
 za'a do melbi
 
-# Chapter 2.17
+### Chapter 2.17 ###
 # Example 2.89
 la djan. cu klama le zarci
 # Example 2.90

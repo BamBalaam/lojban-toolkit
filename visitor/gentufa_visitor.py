@@ -1,6 +1,7 @@
 import json
 import sys
-sys.path.append('.')
+
+sys.path.append(".")
 
 from parsimonious.grammar import NodeVisitor
 
@@ -20,12 +21,16 @@ def add_functions_as_methods(functions):
 
     return decorator
 
+
 @add_functions_as_methods(visitor_functions.functions)
 class GentufaVisitor(NodeVisitor):
 
     def __init__(self, parse_tree):
         self.dictionary = Jbovlaste()
-        self.output = {"sentence": parse_tree.full_text.replace(" EOL", ""), "segments": []}
+        self.output = {
+            "text": parse_tree.full_text.replace(" EOL", ""),
+            "sentences": [],
+        }
         self.visit(parse_tree)
 
     def get_output(self):
@@ -43,9 +48,10 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: gentufa_visitor.py [sentence to parse]")
         sys.exit(1)
-    parse_tree = Gentufa().get_parsed_sentence(sys.argv[1])
-    visitor = GentufaVisitor(parse_tree)
+    parse_tree = Gentufa().get_parsed_text(sys.argv[1])
     try:
+        visitor = GentufaVisitor(parse_tree)
+        print(visitor.get_output())
         print(visitor.get_json_output())
-    except:
-        print("Error:")
+    except Exception as exc:
+        print("Error: ", exc)
