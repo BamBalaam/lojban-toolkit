@@ -17,9 +17,9 @@
 # PEG Base Rules #
 ##################
 
-# A text: one or more lojban sentences, separated by selma'o I ('.i')
+# A text: one or more lojban sentences, separated by selma'o I ('.i'), and followed by an EOL marker to facilitate parsing
 LOJBAN_TEXT = SENTENCE SUBSEQUENT_SENTENCE* EOL
-# A sentence: one or more lojban words/expressions, followed by an EOL marker to facilitate parsing
+# A sentence: one or more lojban words/expressions
 SENTENCE = (LOJBAN_WORDS_OR_EXPRESSIONS)+
 SUBSEQUENT_SENTENCE = SELMAhO_I SENTENCE
 
