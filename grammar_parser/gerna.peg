@@ -47,7 +47,7 @@ TANRU_OR_BRIVLA = TANRU / BRIVLA
 
 CMAVO = (
     SELMAhO_ZEI /
-    SELMAhO_BO / SELMAhO_KE / SELMAhO_KEhE / SELMAhO_SE /
+    SELMAhO_BO / SELMAhO_KE / SELMAhO_KEhE / SELMAhO_BEI / SELMAhO_BEhO / SELMAhO_BE / SELMAhO_CO / SELMAhO_SE /
     SELMAhO_LE / SELMAhO_LA / SELMAhO_KU / SELMAhO_LAhE / SELMAhO_LUhU / SELMAhO_COI /
     SELMAhO_KOhA / SELMAhO_GOhA /
     SELMAhO_CU / SELMAhO_FA /
@@ -105,12 +105,12 @@ SELMAhO_KEhE = KEhE
 KEhE = "ke'e" _  # end grouping
 
 # selma'o BE, BEI and BEhO (Section 5.7): linked sumti marker, separator and terminator
-# SELMAhO_BE = ""
-# SELMAhO_BEI = ""
-# SELMAhO_BEhO = ""
+SELMAhO_BE = "be" _
+SELMAhO_BEI = "bei" _
+SELMAhO_BEhO = "be'o" _
 
 # selma'o CO (Section 5.8): inversion of tanru
-# SELMAhO_CO = ""
+SELMAhO_CO = "co" _
 
 # selma'o MOI (Section 5.9 and Section 18.18): change a number to an ordinal or cardinal selbri
 # SELMAhO_MOI = ""
@@ -265,10 +265,10 @@ CU = "cu" _
 # selma'o FA (Section 9.3): Tagging sumti explicitly
 SELMAhO_FA = FA / FE / FI / FO / FU
 FA = "fa" _  # tags x1 place
-FE = "fe" _  # tags x1 place
-FI = "fi" _  # tags x1 place
-FO = "fo" _  # tags x1 place
-FU = "fu" _  # tags x1 place
+FE = "fe" _  # tags x2 place
+FI = "fi" _  # tags x3 place
+FO = "fo" _  # tags x4 place
+FU = "fu" _  # tags x5 place
 
 ###########################
 # Space/Time Tense System #

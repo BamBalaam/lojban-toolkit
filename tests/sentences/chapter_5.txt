@@ -73,12 +73,76 @@ ta melbi ke cmalu ke nixli ckule ke'e ke'e
 ta melbi ke cmalu nixli bo ckule ke'e
 
 ### Chapter 5.6 ###
+# Example 5.39
+barda xunre gerku
+# Example 5.40
+barda xunre bo gerku
+# Example 5.41
+barda je xunre gerku
+# Example 5.42
+xunre je barda gerku
+# Example 5.43
+barda je pelxu bo xunre gerku
+# Example 5.44
+barda je pelxu xunre gerku
+# Example 5.45
+ta blanu je zdani
+# Example 5.46
+ta melbi je nixli ckule
+# Example 5.52
+blanu naja lenku skapi
+# Example 5.53
+xamgu jo tordu nuntavla
+# Example 5.54
+vajni ju pluka nuntavla
+# Example 5.55
+ricfu je blanu jabo crino
+# Example 5.56
+ricfu je blanu jabo crino bo blanu
+# Example 5.57
+ricfu je ke blanu ja crino ke'e
+# Example 5.58
+ti blanu joi xunre bolci
+# Example 5.59
+ti blanu xunre bolci
+# Example 5.60
+ti blanu je xunre bolci
+# Example 5.61
+gu'e barda gi xunre gerku
+# Example 5.62
+gu'e barda je xunre gi gerku ja mlatu
 
 ### Chapter 5.7 ###
+# Example 5.63
+ti xamgu zdani
+# Example 5.64
+ti xamgu be do bei mi be'o zdani
+# Example 5.66
+mi klama be le zarci bei le zdani be'o
+# Example 5.67
+mi klama le zarci le zdani
+# Example 5.68
+melbi je cmalu nixli bo ckule
+# Example 5.69
+ti xamgu be fi mi bei fe do be'o zdani
+# Example 5.70
+ti xamgu be fi mi be'o zdani
 
 ### Chapter 5.8 ###
+# Example 5.77
+ta zdani co blanu
+# Example 5.78
+mi klama be le zarci bei le zdani be'o troci
+# Example 5.79
+mi troci co klama le zarci le zdani
+# Example 5.80
+ta nixli bo ckule co cmalu
+# Example 5.82
+ckule co melbi nixli
 
 ### Chapter 5.9 ###
+# Example 5.90
+la djan. go'i troci
 
 ### Chapter 5.10 ###
 

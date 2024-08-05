@@ -29,12 +29,32 @@ le remna pu finti le lisri
 lo remna pu finti le lisri
 
 ### Chapter 6.3 ###
+# Example 6.17
+lei prenu cu bevri le pipno
+# Example 6.18
+loi cinfo cu xabju le fi'ortu'a
+# Example 6.20
+loi matne cu ranti
 
 ### Chapter 6.4 ###
+# Example 6.24
+lo'i ratcu cu barda
+# Example 6.25
+mi fadni zo'e lo'i lobypli
 
 ### Chapter 6.5 ###
+# Example 6.26
+lo'e cinfo cu xabju le fi'ortu'a
+# Example 6.28
+le'e xelso merko cu gusta ponse
 
 ### Chapter 6.6 ###
+# Example 6.30
+do cadzu le bisli
+# Example 6.31
+re do cadzu le bisli
+# Example 6.32
+mi ponse su'o ci cutci
 
 ### Chapter 6.7 ###
 
@@ -47,6 +67,12 @@ lo remna pu finti le lisri
 ### Chapter 6.11 ###
 
 ### Chapter 6.12 ###
+# Example 6.74
+la djonz. klama le zarci
+# Example 6.76
+coi .djan.
+# Example 6.77
+zo .djan. cmene mi
 
 ### Chapter 6.13 ###
 

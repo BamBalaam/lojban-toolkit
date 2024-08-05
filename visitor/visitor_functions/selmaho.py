@@ -311,3 +311,51 @@ def visit_KEhE(self, node, visited_children):
             "type": "cmavo / selma'o KehE",
         }
     }
+
+def visit_SELMAhO_BE(self, node, visited_children):
+    return {
+        "be": {
+            "definition": "linked sumti marker",
+            "type": "cmavo / selma'o BE",
+        }
+    }
+
+def visit_SELMAhO_BEI(self, node, visited_children):
+    return {
+        "bei": {
+            "definition": "linked sumti separator",
+            "type": "cmavo / selma'o BEI",
+        }
+    }
+
+def visit_SELMAhO_BEhO(self, node, visited_children):
+    return {
+        "be'o": {
+            "definition": "linked sumti terminator",
+            "type": "cmavo / selma'o BEhO",
+        }
+    }
+
+def visit_SELMAhO_CO(self, node, visited_children):
+    return {
+        "co": {
+            "definition": "inversion of tanru",
+            "type": "cmavo / selma'o CO",
+        }
+    }
+
+def visit_SELMAhO_FA(self, node, visited_children):
+    definition = {
+        "fa": "tags x1 place",
+        "fe": "tags x2 place",
+        "fi": "tags x3 place",
+        "fo": "tags x4 place",
+        "fu": "tags x5 place",
+    }
+    literal = visited_children[0][0].text
+    return {
+        literal: {
+            "definition": definition[literal],
+            "type": "cmavo / selma'o FA / tagging sumti explicitly",
+        }
+    }
