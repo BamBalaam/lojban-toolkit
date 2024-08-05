@@ -89,7 +89,9 @@ SELMAhO_ZEI = (GISMU / FUhIVLA / CMENE) ZEI (GISMU / FUhIVLA / CMENE)
 # The Structure Of Lojban selbri #
 ##################################
 
-# Tanru (Chapter 5.2): two or more brivla placed together, like two nouns, adjective-noun or adverb-verb for example
+# Tanru (Chapter 5.2): two or more brivla placed together, like two nouns, adjective-noun or adverb-verb for example.
+# This allows to combine words in order to create new meanings, if a word for what you want to say does not exist.
+# The closest comparison possible is metaphors.
 TANRU = BRIVLA{2,}
 
 # selma'o BO (Section 5.3, Section 15.6 and Section 18.17): scope grouping, i.e. differentiate between "big dog-catcher" and "big-dog catcher"
