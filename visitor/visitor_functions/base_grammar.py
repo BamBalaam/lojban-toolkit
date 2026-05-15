@@ -30,23 +30,20 @@ def visit_BRIVLA(self, node, visited_children):
 def visit_TANRU(self, node, visited_children):
     return visited_children
 
-def visit_GISMU(self, node, visited_children):
+def _visit_brivla(self, node, visited_children):
     literal = visited_children[0][0].text
-    gismu_struct = self.dictionary.get_word_struct(literal)
-    gismu_struct["sumti"] = self.dictionary.get_definition_arguments(literal)["args"]
-    return {literal: gismu_struct}
+    struct = self.dictionary.get_word_struct(literal)
+    struct["sumti"] = self.dictionary.get_definition_arguments(literal)["args"]
+    return {literal: struct}
+
+def visit_GISMU(self, node, visited_children):
+    return _visit_brivla(self, node, visited_children)
 
 def visit_LUJVO(self, node, visited_children):
-    literal = visited_children[0][0].text
-    lujvo_struct = self.dictionary.get_word_struct(literal)
-    lujvo_struct["sumti"] = self.dictionary.get_definition_arguments(literal)["args"]
-    return {literal: lujvo_struct}
+    return _visit_brivla(self, node, visited_children)
 
 def visit_FUhIVLA(self, node, visited_children):
-    literal = visited_children[0][0].text
-    fuhivla_struct = self.dictionary.get_word_struct(literal)
-    fuhivla_struct["sumti"] = self.dictionary.get_definition_arguments(literal)["args"]
-    return {literal: fuhivla_struct}
+    return _visit_brivla(self, node, visited_children)
 
 def visit_CMENE(self, node, visited_children):
     literal = visited_children[0].text

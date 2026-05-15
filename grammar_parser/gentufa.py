@@ -25,11 +25,7 @@ class Gentufa:
         tags = re.findall(r"\{\{(.*?)\}\}", grammar_text)
         for tag in tags:
             words = dictionary[tag].keys()
-            replacement_to_tag = ""
-            for word in words:
-                replacement_to_tag += f'( "{word}" _ ) / '
-            # clear last element adding an unused "/ "
-            replacement_to_tag = replacement_to_tag[:-3]
+            replacement_to_tag = " / ".join(f'( "{word}" _ )' for word in words)
             # replace tag with dictionary words
             grammar_text = grammar_text.replace(
                 "{{{{{0}}}}}".format(tag), replacement_to_tag

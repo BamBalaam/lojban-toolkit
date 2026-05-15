@@ -24,7 +24,7 @@ def sentences():
             for sentence in f.readlines():
                 # Ignore comments grouping sentences by subsection
                 # and whitespaces
-                if sentence[0] != "#" and sentence.strip() != "":
+                if sentence.strip() and not sentence.startswith("#"):
                     collected_sentences.append(
                         (chapter_number, line_number, sentence.strip())
                     )

@@ -29,7 +29,7 @@ class Jbovlaste:
         for word in words:
             valsi, valsi_type = word.attrib["word"], word.attrib["type"]
 
-            if valsi_type not in self._dictionary.keys():
+            if valsi_type not in self._dictionary:
                 self._dictionary[valsi_type] = {}
 
             self._dictionary[valsi_type][valsi] = {}
@@ -53,23 +53,19 @@ class Jbovlaste:
         return self._dictionary
 
     def get_word_struct(self, word):
-        word_struct = None
         for valsi_type, words in self._dictionary.items():
-            try:
-                word_struct = words[word]
+            if word in words:
+                word_struct = dict(words[word])
                 word_struct["type"] = valsi_type
-            except KeyError:
-                pass
-        if word_struct is None:
-            raise KeyError("Word not found in the jbovlaste.")
-        return word_struct
+                return word_struct
+        raise KeyError("Word not found in the jbovlaste.")
 
     def get_word_pretty(self, word):
         output_word = self.get_word_struct(word)
         pretty_string = f"{word}\n\n"
         pretty_string += f"Word Type: {output_word['type']}\n"
         pretty_string += f"Definition: {output_word['definition']}\n"
-        if len(output_word["glosswords"]) != 0:
+        if output_word["glosswords"]:
             pretty_string += "Glossary Words:\n"
             for glossword in output_word["glosswords"]:
                 if glossword["sense"] is None:
