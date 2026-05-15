@@ -33,7 +33,7 @@ mi prami la djein. .i mi nelci la'e di'u
 ### Chapter 7.5 ###
 # Example 7.21
 la .alis. klama le zarci .i ko'a blanu
-Example 7.24
+# Example 7.24
 la .alis. goi ko'a klama le zarci .i ko'a cu blanu
 
 ### Chapter 7.6 ###

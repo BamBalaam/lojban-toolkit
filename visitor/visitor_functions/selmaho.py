@@ -20,6 +20,9 @@ def visit_SELMAhO_LE(self, node, visited_children):
     definition = {
         "le": "The, the one(s) described as",
         "lo": "Some, some of those which really are",
+        "lo'i": "The set of those which really are",
+        "lo'e": "The typical member of those which really are",
+        "le'e": "The stereotypical one described as",
     }
     literal = visited_children[0][0].text
     return {
@@ -169,7 +172,7 @@ def visit_KOhA_ZOhE_SERIES(self, node, visited_children):
 def visit_KOhA_OTHER(self, node, visited_children):
     return visited_children[0]
 
-def visit_MA(self, node, visited_childre):
+def visit_MA(self, node, visited_children):
     return {
         "ma": {
             "definition": "asking a sumti question",
@@ -357,5 +360,103 @@ def visit_SELMAhO_FA(self, node, visited_children):
         literal: {
             "definition": definition[literal],
             "type": "cmavo / selma'o FA / tagging sumti explicitly",
+        }
+    }
+
+def visit_SELMAhO_ZEI(self, node, visited_children):
+    return {
+        "zei": {
+            "definition": "join two words to create a lujvo",
+            "type": "cmavo / selma'o ZEI",
+            "compound": node.text.strip(),
+        }
+    }
+
+def visit_KOhA_ASSIGNED_SERIES(self, node, visited_children):
+    pronouns_definition = {
+        "ko'a": "Assigned pro-sumti #1",
+        "ko'e": "Assigned pro-sumti #2",
+        "ko'i": "Assigned pro-sumti #3",
+        "ko'o": "Assigned pro-sumti #4",
+        "ko'u": "Assigned pro-sumti #5",
+        "fo'a": "Assigned pro-sumti #6",
+        "fo'e": "Assigned pro-sumti #7",
+        "fo'i": "Assigned pro-sumti #8",
+        "fo'o": "Assigned pro-sumti #9",
+        "fo'u": "Assigned pro-sumti #10",
+    }
+    literal = visited_children[0][0].text
+    return {
+        literal: {
+            "definition": pronouns_definition[literal],
+            "type": "cmavo / selma'o KOhA (ko'a series) / assigned pro-sumti",
+        }
+    }
+
+def visit_KOhA_VOhA_SERIES(self, node, visited_children):
+    pronouns_definition = {
+        "vo'a": "Reflexive for x1 place",
+        "vo'e": "Reflexive for x2 place",
+        "vo'i": "Reflexive for x3 place",
+        "vo'u": "Reflexive for x4 place",
+    }
+    literal = visited_children[0][0].text
+    return {
+        literal: {
+            "definition": pronouns_definition[literal],
+            "type": "cmavo / selma'o KOhA (vo'a series) / reflexive pronouns",
+        }
+    }
+
+def visit_MIhE(self, node, visited_children):
+    return {
+        "mi'e": {
+            "definition": "I am called (address pro-sumti)",
+            "type": "cmavo / selma'o MIhE",
+        }
+    }
+
+def visit_LU(self, node, visited_children):
+    return {
+        "lu": {
+            "definition": "start quote of Lojban words",
+            "type": "cmavo / selma'o LU",
+        }
+    }
+
+def visit_LIhU(self, node, visited_children):
+    return {
+        "li'u": {
+            "definition": "end quote of Lojban words",
+            "type": "cmavo / selma'o LIhU",
+        }
+    }
+
+def visit_SELMAhO_PA(self, node, visited_children):
+    definition = {
+        "su'o": "at least",
+        "su'e": "at most",
+    }
+    literal = visited_children[0][0].text
+    return {
+        literal: {
+            "definition": definition[literal],
+            "type": "cmavo / selma'o PA / number/quantifier",
+        }
+    }
+
+def visit_SELMAhO_GUhA(self, node, visited_children):
+    definition = {
+        "gu'a": "forethought or",
+        "gu'e": "forethought and",
+        "gu'i": "forethought if-and-only-if",
+        "gu'o": "forethought only-if",
+        "gu'u": "forethought whether-or-not",
+    }
+    literal = visited_children[0][0].text
+    return {
+        literal: {
+            "definition": definition[literal],
+            "type": "cmavo / selma'o GUhA / forethought logical connective",
         }
     }

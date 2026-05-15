@@ -49,9 +49,11 @@ CMAVO = (
     SELMAhO_ZEI /
     SELMAhO_BO / SELMAhO_KE / SELMAhO_KEhE / SELMAhO_BEI / SELMAhO_BEhO / SELMAhO_BE / SELMAhO_CO / SELMAhO_SE /
     SELMAhO_LE / SELMAhO_LA / SELMAhO_KU / SELMAhO_LAhE / SELMAhO_LUhU / SELMAhO_COI /
+    SELMAhO_MIhE / SELMAhO_LIhU / SELMAhO_LU /
     SELMAhO_KOhA / SELMAhO_GOhA /
     SELMAhO_CU / SELMAhO_FA /
     SELMAhO_VA / SELMAhO_FAhA / SELMAhO_PU / SELMAhO_ZI /
+    SELMAhO_PA / SELMAhO_GUhA /
     SELMAhO_UI /
     SELMAhO_BY /
     SELMAhO_BAhE
@@ -138,9 +140,12 @@ SELMAhO_SE = SE / TE / VE / XE
 # - numbers
 
 # selma'o LE and LA (Section 6.2): Descriptions
-SELMAhO_LE = LE / LO
-LE = "le" _ # the, the one(s) described as
-LO = "lo" _ # some, some of those which really are
+SELMAhO_LE = LE / LO / LOhI / LOhE / LEhE
+LE = "le" _   # the, the one(s) described as
+LO = "lo" _   # some, some of those which really are
+LOhI = "lo'i" _ # the set of those which really are
+LOhE = "lo'e" _ # the typical member of those which really are
+LEhE = "le'e" _ # the stereotypical one described as
 SELMAhO_LA = LA
 LA = "la" _ # the ones named
 
@@ -167,6 +172,16 @@ SELMAhO_COI = ( COI / COhO )
 COI = "coi" '.'{0,1} _   # Greeting
 COhO = "co'o" '.'{0,1} _ # Goodbye
 
+# selma'o MIhE (Section 7.2): Address pro-sumti ("I am called")
+SELMAhO_MIhE = MIhE
+MIhE = "mi'e" _
+
+# selma'o LU and LIhU (Section 19.10): Quotation of Lojban words
+SELMAhO_LU = LU
+LU = "lu" _
+SELMAhO_LIhU = LIhU
+LIhU = "li'u" _
+
 ###########################
 # Pro-sumti and Pro-bridi #
 ###########################
@@ -178,7 +193,7 @@ COhO = "co'o" '.'{0,1} _ # Goodbye
 # Let's explore a few families of these.
 
 # selma'o KOhA (Section 7.1): Pro-sumti
-SELMAhO_KOhA = KOhA_MI_SERIES / KOhA_TI_SERIES / KOhA_DIhU_SERIES / KOhA_RI_SERIES / KOhA_ZOhE_SERIES / KOhA_OTHER
+SELMAhO_KOhA = KOhA_MI_SERIES / KOhA_TI_SERIES / KOhA_DIhU_SERIES / KOhA_RI_SERIES / KOhA_ZOhE_SERIES / KOhA_ASSIGNED_SERIES / KOhA_VOhA_SERIES / KOhA_OTHER
 
 # selma'o KOhA: mi-series (Section 7.2): Personal pronouns
 KOhA_MI_SERIES = (MI / MIhO / MIhA / MAhA / DO / DOhO / KO)
@@ -218,6 +233,26 @@ KOhA_ZOhE_SERIES = (ZOhE / ZUhI / ZIhO)
 ZOhE = "zo'e" _ # Obvious value
 ZUhI = "zu'i" _ # Typical value
 ZIhO = "zi'o" _ # Nonexistent value
+
+# selma'o KOhA: ko'a-series (Section 7.5): Assigned pro-sumti
+KOhA_ASSIGNED_SERIES = (KOhA1 / KOhA2 / KOhA3 / KOhA4 / KOhA5 / FOhA1 / FOhA2 / FOhA3 / FOhA4 / FOhA5)
+KOhA1 = "ko'a" _
+KOhA2 = "ko'e" _
+KOhA3 = "ko'i" _
+KOhA4 = "ko'o" _
+KOhA5 = "ko'u" _
+FOhA1 = "fo'a" _
+FOhA2 = "fo'e" _
+FOhA3 = "fo'i" _
+FOhA4 = "fo'o" _
+FOhA5 = "fo'u" _
+
+# selma'o KOhA: vo'a-series (Section 7.8): Reflexive pronouns
+KOhA_VOhA_SERIES = (VOhA / VOhE / VOhI / VOhU)
+VOhA = "vo'a" _ # Reflexive for x1 place
+VOhE = "vo'e" _ # Reflexive for x2 place
+VOhI = "vo'i" _ # Reflexive for x3 place
+VOhU = "vo'u" _ # Reflexive for x4 place
 
 # Other misc cmavo in selma'o KOhA
 # Asking sumti questions - cmavo "ma" (Section 7.9)
@@ -298,6 +333,23 @@ SELMAhO_ZI = (ZI / ZA / ZU)
 ZI = "zi" _ # short time distance
 ZA = "za" _ # medium time distance
 ZU = "zu" _ # long time distance
+
+######################
+# Numbers and Connectives #
+######################
+
+# selma'o PA (Section 6.6): Number/quantifier cmavo (those with apostrophes)
+SELMAhO_PA = SUhO / SUhE
+SUhO = "su'o" _ # at least
+SUhE = "su'e" _ # at most
+
+# selma'o GUhA (Section 14.14): Forethought logical connectives for selbri
+SELMAhO_GUhA = GUhA_E / GUhA_A / GUhA_I / GUhA_O / GUhA_U
+GUhA_A = "gu'a" _ # forethought or
+GUhA_E = "gu'e" _ # forethought and
+GUhA_I = "gu'i" _ # forethought if-and-only-if
+GUhA_O = "gu'o" _ # forethought only-if
+GUhA_U = "gu'u" _ # forethought whether-or-not
 
 ########################################
 # Attitudinal and Emotional Indicators #
