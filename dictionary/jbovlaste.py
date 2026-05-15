@@ -17,7 +17,12 @@ class Jbovlaste:
         - optional glossary words in the target language of the dictionary
     """
 
+    _cache = {}
+
     def __init__(self, language="en"):
+        if language in Jbovlaste._cache:
+            self._dictionary = Jbovlaste._cache[language]
+            return
         self._dictionary = {}
         try:
             tree = ET.parse(os.path.join(__location__, f"jbovlaste-{language}.xml"))
@@ -48,6 +53,7 @@ class Jbovlaste:
                         "sense": sense,
                     }
                 )
+        Jbovlaste._cache[language] = self._dictionary
 
     def get_whole_dict(self):
         return self._dictionary
